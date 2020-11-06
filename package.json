@@ -1,0 +1,28 @@
+{
+  "name": "scan-scanner-and-printers",
+  "version": "1.0.0",
+  "description": "Initialized",
+  "main": "index.js",
+  "dependencies": {
+    "consign": "^0.1.6",
+    "express": "^4.17.1",
+    "moment": "^2.29.1",
+    "mysql": "^2.18.1",
+    "nodemon": "^2.0.6",
+    "request": "^2.88.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YuriRamosC/scan-scanner-and-printers.git"
+  },
+  "author": "Yuri Ramos Canário Campos",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/YuriRamosC/scan-scanner-and-printers/issues"
+  },
+  "homepage": "https://github.com/YuriRamosC/scan-scanner-and-printers#readme"
+}
