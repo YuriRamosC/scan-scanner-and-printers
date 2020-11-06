@@ -1,6 +1,12 @@
 
-const moment = require('moment')
-const conexao = require('../infraestrutura/conexao')
+const moment = require('moment');
+const conexao = require('../infra/conexao');
+const request = require('request');
+
+const hostname ='https://api.printwayy.com';
+const printers_path='/devices/v1/printers';
+
+//5542C0E2-6C0F-43F1-B576-5056CED690B1
 
 class Impressora {
     adiciona(impressora, res) {
@@ -27,6 +33,12 @@ class Impressora {
                 res.status(200).json(resultados)
             }
         })
+    }
+
+    listaDevour(res) {
+        request(`${hostname}${printers_path}`, (err, req, body) =>{
+            console.log(body);
+        });
     }
 
     buscaPorId(id, res) {

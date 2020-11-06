@@ -6,6 +6,7 @@
   "dependencies": {
     "consign": "^0.1.6",
     "express": "^4.17.1",
+    "https": "^1.0.0",
     "moment": "^2.29.1",
     "mysql": "^2.18.1",
     "nodemon": "^2.0.6",
@@ -13,6 +14,7 @@
   },
   "devDependencies": {},
   "scripts": {
+    "start": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
