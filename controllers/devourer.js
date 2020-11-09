@@ -29,8 +29,12 @@ class Devourer {
                     for (var row in impressoras) {
                         //SQL //
                         let customerName = '';
+                        let ipFinal ='';
                         if (impressoras[row].customer != null) {
                             customerName = impressoras[row].customer.name;
+                        }
+                        if(impressoras[row].ipAdress != null) {
+                            ipFinal = impressoras[row].ipAddress;
                         }
                         impressorasAtualizadas.push({
                             id_way: impressoras[row].id,
@@ -40,7 +44,7 @@ class Devourer {
                             lastCommunication: impressoras[row].lastCommunication,
                             installationPoint: impressoras[row].installationPoint,
                             observation: impressoras[row].observation,
-                            ipAddres: impressoras[row].ipAddres,
+                            ipAddres: ipFinal,
                             manufacturer: impressoras[row].manufacturer,
                             model: impressoras[row].model,
                             customer_name: customerName

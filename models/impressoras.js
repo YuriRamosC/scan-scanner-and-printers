@@ -7,9 +7,9 @@ const { waitForDebugger } = require('inspector');
 class Impressora {
     adiciona(impressora, res) {
 
-        const sql = 'INSERT INTO Impressoras SET ?'
+        const sql = 'INSERT INTO impressoras SET ?'
 
-        conexao.query(sql, (erro, resultados) => {
+        conexao.query(sql, impressora,(erro, resultados) => {
             if (erro) {
                 res.status(400).json(erro)
             } else {
@@ -20,7 +20,7 @@ class Impressora {
     }
 
     lista(res) {
-        const sql = 'SELECT * FROM Impressoras'
+        const sql = 'SELECT * FROM impressoras'
 
         conexao.query(sql, (erro, resultados) => {
             if (erro) {
@@ -43,17 +43,17 @@ class Impressora {
             await Devourer.requestPrintWayy(200, impressorasAtualizadas);
         } finally {
             //     console.log('Finally: ' + impressorasAtualizadas.length);
-            setTimeout(function () {
+            setTimeout(()=> {
                 console.dir(impressorasAtualizadas[0]);
-                for (var row = 0; row < impressorasAtualizadas.length; row++) {
-                    Impressora.adiciona(impressorasAtualizadas[row], res);
-                }
+            //    for (var row = 0; row < impressorasAtualizadas.length; row++) {
+                    this.adiciona(impressorasAtualizadas[0], res);
+             //   }
             }, 5000);
         }
     }
 
     buscaPorId(id, res) {
-        const sql = `SELECT * FROM Impressoras WHERE id=${id}`
+        const sql = `SELECT * FROM impressoras WHERE id=${id}`
 
         conexao.query(sql, (erro, resultados) => {
             const impressora = resultados[0]
@@ -69,7 +69,7 @@ class Impressora {
         if (valores.data) {
             valores.data = moment(valores.data, 'DD/MM/YYYY').format('YYYY-MM-DD HH:MM:SS')
         }
-        const sql = 'UPDATE Impressoras SET ? WHERE id=?'
+        const sql = 'UPDATE impressoras SET ? WHERE id=?'
 
         conexao.query(sql, [valores, id], (erro, resultados) => {
             if (erro) {
@@ -81,7 +81,7 @@ class Impressora {
     }
 
     deleta(id, res) {
-        const sql = 'DELETE FROM Impressoras WHERE id=?'
+        const sql = 'DELETE FROM impressoras WHERE id=?'
 
         conexao.query(sql, id, (erro, resultados) => {
             if (erro) {

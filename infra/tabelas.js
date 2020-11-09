@@ -15,7 +15,7 @@ class Tabelas {
             lastCommunication VARCHAR(50) NOT NULL,
             installationPoint VARCHAR(60),
             observation TEXT,
-            ipAdress VARCHAR(50),
+            ipAddress VARCHAR(50),
             manufacturer VARCHAR(30),
             model VARCHAR(30),
             customer_name VARCHAR(50),
