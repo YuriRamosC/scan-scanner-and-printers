@@ -4,8 +4,7 @@ const bodyParser = require('body-parser');
  
 module.exports = () => {
  const app = express();
- 
- app.use(bodyParser.json());
+ app.use(bodyParser.json({limit: 0}));
  app.use(bodyParser.urlencoded({ extended: true }));
  
  consign()

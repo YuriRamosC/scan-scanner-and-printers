@@ -1,22 +1,27 @@
 class Tabelas {
     init(conexao) {
-        this.conexao = conexao
+        this.conexao = conexao;
 
-        this.criarImpressoras()
+        this.criarImpressoras();
     }
 
     criarImpressoras() {
         const sql = `CREATE TABLE IF NOT EXISTS Impressoras
         (id int NOT NULL AUTO_INCREMENT,
-            empresa varchar(50) NOT NULL,
-            fabricante varchar(20),
-            modelo varchar(20) NOT NULL,
-            numero_serie VARCHAR(50) NOT NULL,
-            ponto VARCHAR(50) NOT NULL,
-            ip VARCHAR(50) NOT NULL,
-            ultima_comun datetime,
-            observacoes text,
-            PRIMARY KEY(id))`
+            id_way VARCHAR(50) NOT NULL,
+            tipo_conexao VARCHAR(20) NOT NULL,
+            status VARCHAR(20) NOT NULL,
+            serialNumber VARCHAR(50) NOT NULL,
+            lastCommunication VARCHAR(50) NOT NULL,
+            installationPoint VARCHAR(60),
+            observation TEXT,
+            ipAdress VARCHAR(50),
+            manufacturer VARCHAR(30),
+            model VARCHAR(30),
+            customer_name VARCHAR(50),
+            scan_status VARCHAR(50),
+            scan_observation TEXT,
+            PRIMARY KEY(id))`;
 
         this.conexao.query(sql, erro => {
             if (erro) {
