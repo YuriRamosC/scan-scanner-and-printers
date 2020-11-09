@@ -1,16 +1,8 @@
-
 const moment = require('moment');
 const conexao = require('../infra/conexao');
-const request = require('request');
 const fs = require('fs');
-const hostname = 'https://api.printwayy.com';
-const printers_path = '/devices/v1/printers';
-const urlBase = `${hostname}${printers_path}`;
-const headers = {
-    'printwayy-key': '5542C0E2-6C0F-43F1-B576-5056CED690B1'
-};
-
-//5542C0E2-6C0F-43F1-B576-5056CED690B1
+const Devourer = require('../controllers/devourer');
+const { waitForDebugger } = require('inspector');
 
 class Impressora {
     adiciona(impressora, res) {
@@ -39,45 +31,25 @@ class Impressora {
         })
     }
 
-    requestPrintWayy(skip) {
-        let string = '';
-        let skipString='';
-        if (skip) {
-            skipString = '?skip='+skip;
-        }
-        let urlFinal = urlBase+skipString;
-        return request({ url: urlFinal, headers: headers }, (err, req, resp) => {
-            console.log(urlFinal);
-            if (err) {
-                console.log(err);
-                alert(err);
-            } else {
-                let biribinha = JSON.parse(resp);
-                let impressoras = biribinha.data;
-                //percorrendo o JSON recebido
-                for (var row in impressoras) {
-                    //SQL //
-                    string += JSON.stringify(impressoras[row], null, 4);
+
+    async listaDevour(res) {
+        var impressorasAtualizadas = [];
+        var ok = 0;
+        var resp = 0;
+
+        try {
+            await Devourer.requestPrintWayy(0, impressorasAtualizadas);
+            await Devourer.requestPrintWayy(100, impressorasAtualizadas);
+            await Devourer.requestPrintWayy(200, impressorasAtualizadas);
+        } finally {
+            //     console.log('Finally: ' + impressorasAtualizadas.length);
+            setTimeout(function () {
+                console.dir(impressorasAtualizadas[0]);
+                for (var row = 0; row < impressorasAtualizadas.length; row++) {
+                    Impressora.adiciona(impressorasAtualizadas[row], res);
                 }
-            }
-            string += '\nBIRIBINHA';
-            resp = string;
-            fs.appendFile('impressoras.txt', resp, function (err) {
-                if (err) return console.log(err);
-            });
-        });
-    }
-
-
-    listaDevour(res) {
-        // limpa o arquivo
-        fs.writeFile('impressoras.txt', '', function (err) {
-            if (err) return console.log(err);
-        });
-        //grava os 3 requests
-        this.requestPrintWayy();
-        this.requestPrintWayy(100);
-        this.requestPrintWayy(200);
+            }, 5000);
+        }
     }
 
     buscaPorId(id, res) {

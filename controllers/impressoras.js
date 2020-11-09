@@ -1,5 +1,4 @@
-const Impressora = require('../models/impressoras')
-
+const Impressora = require('../models/impressoras');
 module.exports = app => {
     app.get('/impressoras', (req, res) => {
         Impressora.lista(res);
@@ -16,7 +15,6 @@ module.exports = app => {
 
         Impressora.adiciona(impressora, res)
     }) 
-
     app.get('/impressoras-printwayy', (req, res) => {
         Impressora.listaDevour(res);
         console.log('foi');
@@ -33,4 +31,6 @@ module.exports = app => {
 
         Impressora.deleta(id, res)
     })
+
+
 }
