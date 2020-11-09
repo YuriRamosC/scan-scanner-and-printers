@@ -5,7 +5,7 @@ const request = require('request');
 const fs = require('fs');
 const hostname = 'https://api.printwayy.com';
 const printers_path = '/devices/v1/printers';
-const url = `${hostname}${printers_path}`;
+const urlBase = `${hostname}${printers_path}`;
 const headers = {
     'printwayy-key': '5542C0E2-6C0F-43F1-B576-5056CED690B1'
 };
@@ -39,29 +39,45 @@ class Impressora {
         })
     }
 
-    listaDevour(res) {
-        let biribinha;
-        var impressoras;
+    requestPrintWayy(skip) {
         let string = '';
-        request({ url: url, headers: headers }, (err, req, resp) => {
+        let skipString='';
+        if (skip) {
+            skipString = '?skip='+skip;
+        }
+        let urlFinal = urlBase+skipString;
+        return request({ url: urlFinal, headers: headers }, (err, req, resp) => {
+            console.log(urlFinal);
             if (err) {
                 console.log(err);
                 alert(err);
             } else {
-                biribinha = JSON.parse(resp);
-                impressoras = biribinha.data;
+                let biribinha = JSON.parse(resp);
+                let impressoras = biribinha.data;
+                //percorrendo o JSON recebido
+                for (var row in impressoras) {
+                    //SQL //
+                    string += JSON.stringify(impressoras[row], null, 4);
+                }
             }
+            string += '\nBIRIBINHA';
+            resp = string;
+            fs.appendFile('impressoras.txt', resp, function (err) {
+                if (err) return console.log(err);
+            });
         });
-        console.log(impressoras);
-        //percorrendo o JSON recebido
-        for (var row in impressoras) {
-            //SQL //
-            string += JSON.stringify(impressoras[row], null, 4);
-        }
-        // aqui finaliza
-        fs.writeFile('impressoras.txt', string, function (err) {
+    }
+
+
+    listaDevour(res) {
+        // limpa o arquivo
+        fs.writeFile('impressoras.txt', '', function (err) {
             if (err) return console.log(err);
         });
+        //grava os 3 requests
+        this.requestPrintWayy();
+        this.requestPrintWayy(100);
+        this.requestPrintWayy(200);
     }
 
     buscaPorId(id, res) {
