@@ -18,9 +18,6 @@ module.exports = app => {
         Impressora.adiciona(impressora, res);
     })
 
-    app.get('/impressoraslength',(req, res) => {
-        Impressora.listaOnlyLength(res);
-    } );
     app.get('/impressoras-printwayy', (req, res) => {
         let impressorasAtualizadas = [];
         Devourer.tratarDados(impressorasAtualizadas);

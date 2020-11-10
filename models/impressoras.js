@@ -12,9 +12,14 @@ class Impressora {
         const sql = 'INSERT INTO impressoras SET ?'
 
         conexao.query(sql, impressora, (erro, resultados) => {
-            if (erro) {
-                res.status(400).json(erro);
-            } else {
+            if (erro.sqlMessage == '23000') {
+                //         console.log('duplicada!');
+            } else if (erro) {
+                // console.dir(erro);
+                console.log('aqui');
+                //      res.status(400).json(erro);
+            }
+            else {
                 res.status(201).json(impressora);
             }
         })
@@ -32,20 +37,23 @@ class Impressora {
         })
     }
 
+
+
     gravarImpressorasBD(impressorasAtualizadas, res) {
         return new Promise((resolve, reject) => {
             console.dir('Quantas impressoras tem: ' + impressorasAtualizadas.length);
             const sql = 'INSERT INTO impressoras SET ?';
             for (var row = 0; row < impressorasAtualizadas.length; row++) {
                 conexao.query(sql, impressorasAtualizadas[row], (erro, resultados) => {
-                    if (erro) {
-                        //res.status(400).json(erro);
-                        console.log(erro);
+                    if (erro.code === 'ER_DUP_ENTRY') {
+                        console.log('duplicada!');
+                    } else if (erro) {
+                        res.status(400).json(erro);
                     }
                 });
             };
 
-            resolve(impressorasAtualizadas);
+            resolve(console.log('cabou'));
         });
     };
 
