@@ -1,5 +1,7 @@
 const Impressora = require('../models/impressoras');
+const Devourer = require('./devourer');
 module.exports = app => {
+
     app.get('/impressoras', (req, res) => {
         Impressora.lista(res);
     })
@@ -16,8 +18,13 @@ module.exports = app => {
         Impressora.adiciona(impressora, res)
     }) 
     app.get('/impressoras-printwayy', (req, res) => {
-        Impressora.listaDevour(res);
-        console.log('foi');
+        var impressorasAtualizadas = [];
+        var ok = 0;
+        var resp = 0;
+        
+        Devourer.tratarDados(impressorasAtualizadas);
+        setTimeout(function () {Impressora.listaImpressoras(impressorasAtualizadas, res)}, 6000).then(res.redirect('/impressoras'));
+
     });
     app.patch('/impressoras/:id', (req, res) => {
         const id = parseInt(req.params.id)
@@ -31,6 +38,4 @@ module.exports = app => {
 
         Impressora.deleta(id, res)
     })
-
-
 }

@@ -8,11 +8,11 @@ class Tabelas {
     criarImpressoras() {
         const sql = `CREATE TABLE IF NOT EXISTS Impressoras
         (id int NOT NULL AUTO_INCREMENT,
-            id_way VARCHAR(50) NOT NULL,
+            id_way VARCHAR(50) NOT NULL UNIQUE,
             tipo_conexao VARCHAR(20) NOT NULL,
             status VARCHAR(20) NOT NULL,
             serialNumber VARCHAR(50) NOT NULL,
-            lastCommunication VARCHAR(50) NOT NULL,
+            lastCommunication VARCHAR(50),
             installationPoint VARCHAR(60),
             observation TEXT,
             ipAddress VARCHAR(50),

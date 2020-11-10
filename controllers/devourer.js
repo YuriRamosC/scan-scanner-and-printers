@@ -9,7 +9,7 @@ const headers = {
 
 
 class Devourer {
-    async requestPrintWayy(skip, impressorasAtualizadas, resp) {
+    requestPrintWayy(skip, impressorasAtualizadas) {
         try {
             let string = '';
             let skipString = '';
@@ -17,7 +17,7 @@ class Devourer {
                 skipString = '?skip=' + skip;
             }
             let urlFinal = urlBase + skipString;
-            request({ url: urlFinal, headers: headers }, (err, req, resp) => {
+            return request({ url: urlFinal, headers: headers }, (err, req, resp) => {
                 console.log(urlFinal);
                 if (err) {
                     console.log(err);
@@ -33,7 +33,7 @@ class Devourer {
                         if (impressoras[row].customer != null) {
                             customerName = impressoras[row].customer.name;
                         }
-                        if(impressoras[row].ipAdress != null) {
+                        if(impressoras[row].ipAdress != 'NULL') {
                             ipFinal = impressoras[row].ipAddress;
                         }
                         impressorasAtualizadas.push({
@@ -44,7 +44,7 @@ class Devourer {
                             lastCommunication: impressoras[row].lastCommunication,
                             installationPoint: impressoras[row].installationPoint,
                             observation: impressoras[row].observation,
-                            ipAddres: ipFinal,
+                            ipAddress: ipFinal,
                             manufacturer: impressoras[row].manufacturer,
                             model: impressoras[row].model,
                             customer_name: customerName
@@ -57,9 +57,24 @@ class Devourer {
             return impressorasAtualizadas;
         }
     }
+
+    async tratarDados(impressorasAtualizadas) {
+        try {
+            impressorasAtualizadas = await this.requestPrintWayy(0, impressorasAtualizadas);
+            impressorasAtualizadas = await this.requestPrintWayy(100, impressorasAtualizadas);
+            impressorasAtualizadas = await this.requestPrintWayy(200, impressorasAtualizadas);
+        } finally {
+            //     console.log('Finally: ' + impressorasAtualizadas.length);
+            // setTimeout(()=> {
+            console.dir('Quantas impressoras tem: ' + impressorasAtualizadas.length);
+            //    for (var row = 0; row < impressorasAtualizadas.length; row++) {
+            //this.adiciona(impressorasAtualizadas[0], res);
+            //   }
+            //  }, 5000);
+        }
+    };
 }
 module.exports = new Devourer;
-
 /*
 "customer": {
         "id": "cfc6635d-0355-47ea-ae56-cb48feed6eed",

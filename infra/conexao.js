@@ -8,4 +8,4 @@ const conexao = mysql.createConnection({
     database: 'scan-scanner-and-printers'
 })
 
-module.exports = conexao
+module.exports = conexao;

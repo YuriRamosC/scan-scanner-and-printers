@@ -7,18 +7,18 @@ const { waitForDebugger } = require('inspector');
 class Impressora {
     adiciona(impressora, res) {
 
+        console.dir(impressora);
         const sql = 'INSERT INTO impressoras SET ?'
 
-        conexao.query(sql, impressora,(erro, resultados) => {
+        conexao.query(sql, impressora, (erro, resultados) => {
             if (erro) {
-                res.status(400).json(erro)
+                res.status(400).json(erro);
             } else {
-                res.status(201).json(impressora)
+                res.status(201).json(impressora);
             }
         })
 
     }
-
     lista(res) {
         const sql = 'SELECT * FROM impressoras'
 
@@ -30,27 +30,22 @@ class Impressora {
             }
         })
     }
-
-
-    async listaDevour(res) {
-        var impressorasAtualizadas = [];
-        var ok = 0;
-        var resp = 0;
-
-        try {
-            await Devourer.requestPrintWayy(0, impressorasAtualizadas);
-            await Devourer.requestPrintWayy(100, impressorasAtualizadas);
-            await Devourer.requestPrintWayy(200, impressorasAtualizadas);
-        } finally {
-            //     console.log('Finally: ' + impressorasAtualizadas.length);
-            setTimeout(()=> {
-                console.dir(impressorasAtualizadas[0]);
-            //    for (var row = 0; row < impressorasAtualizadas.length; row++) {
-                    this.adiciona(impressorasAtualizadas[0], res);
-             //   }
-            }, 5000);
-        }
-    }
+    listaImpressoras(impressorasAtualizadas, res) {
+        console.dir('Quantas impressoras tem: ' + impressorasAtualizadas.length);
+        const sql = 'INSERT INTO impressoras SET ?';
+        for (var row = 0; row < impressorasAtualizadas.length; row++) {
+            conexao.query(sql, impressorasAtualizadas[row], (erro, resultados) => {
+                if (erro) {
+                    res.status(400).json(erro);
+                } else if(row == impressorasAtualizadas.length-1) {
+                    res.status(200);
+                }
+                else {
+                    res.status(201);
+                }
+            });
+        };
+    };
 
     buscaPorId(id, res) {
         const sql = `SELECT * FROM impressoras WHERE id=${id}`
