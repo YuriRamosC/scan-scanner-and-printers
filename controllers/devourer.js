@@ -1,5 +1,6 @@
 const fs = require('fs');
 const request = require('request');
+const Impressora = require('../models/impressoras');
 const hostname = 'https://api.printwayy.com';
 const printers_path = '/devices/v1/printers';
 const urlBase = `${hostname}${printers_path}`;
@@ -10,30 +11,30 @@ const headers = {
 
 class Devourer {
     requestPrintWayy(skip, impressorasAtualizadas) {
-        try {
+        return new Promise((resolve, reject) => {
             let string = '';
             let skipString = '';
+            let requestReturn;
             if (skip > 0) {
                 skipString = '?skip=' + skip;
             }
             let urlFinal = urlBase + skipString;
-            return request({ url: urlFinal, headers: headers }, (err, req, resp) => {
-                console.log(urlFinal);
+            request({ url: urlFinal, headers: headers }, (err, req, resp) => {
                 if (err) {
                     console.log(err);
                     alert(err);
                 } else {
                     let biribinha = JSON.parse(resp);
-                    let impressoras = biribinha.data;
+                    var impressoras = biribinha.data;
                     //percorrendo o JSON recebido
                     for (var row in impressoras) {
                         //SQL //
                         let customerName = '';
-                        let ipFinal ='';
+                        let ipFinal = '';
                         if (impressoras[row].customer != null) {
                             customerName = impressoras[row].customer.name;
                         }
-                        if(impressoras[row].ipAdress != 'NULL') {
+                        if (impressoras[row].ipAdress != 'NULL') {
                             ipFinal = impressoras[row].ipAddress;
                         }
                         impressorasAtualizadas.push({
@@ -51,29 +52,26 @@ class Devourer {
                         });
                     }
                 }
-                console.log(impressorasAtualizadas.length);
+                if (skip == 0) {
+                    resolve(this.requestPrintWayy(100, impressorasAtualizadas));
+                } else if (skip == 100) {
+                    resolve(this.requestPrintWayy(200, impressorasAtualizadas));
+                } else if (skip == 200) {
+                    resolve(Impressora.gravarImpressorasBD(impressorasAtualizadas, resp));
+                }
+                /// console.log('Essa é a Promise: '+skip);
             });
-        } finally {
-            return impressorasAtualizadas;
-        }
+        });
     }
 
     tratarDados(impressorasAtualizadas) {
         return new Promise((resolve, reject) => {
 
-            impressorasAtualizadas = this.requestPrintWayy(0, impressorasAtualizadas);
-            impressorasAtualizadas =this.requestPrintWayy(100, impressorasAtualizadas);
-            impressorasAtualizadas =this.requestPrintWayy(200, impressorasAtualizadas);
-            
+            this.requestPrintWayy(0, impressorasAtualizadas);
+
             resolve(impressorasAtualizadas);
         });
 
     };
 }
 module.exports = new Devourer;
-/*
-"customer": {
-        "id": "cfc6635d-0355-47ea-ae56-cb48feed6eed",
-        "name": "GRINGO CONEXÕES"
-    },
-*/

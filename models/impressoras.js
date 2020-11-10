@@ -31,24 +31,24 @@ class Impressora {
             }
         })
     }
-    listaImpressoras(impressorasAtualizadas, res) {
+
+    gravarImpressorasBD(impressorasAtualizadas, res) {
         return new Promise((resolve, reject) => {
             console.dir('Quantas impressoras tem: ' + impressorasAtualizadas.length);
             const sql = 'INSERT INTO impressoras SET ?';
             for (var row = 0; row < impressorasAtualizadas.length; row++) {
                 conexao.query(sql, impressorasAtualizadas[row], (erro, resultados) => {
                     if (erro) {
-                        res.status(400).json(erro);
-                    }
-                    else {
-                        res.status(201);
+                        //res.status(400).json(erro);
+                        console.log(erro);
                     }
                 });
             };
 
-            resolve(res);
+            resolve(console.log('cabou'));
         });
     };
+
 
     buscaPorId(id, res) {
         const sql = `SELECT * FROM impressoras WHERE id=${id}`
@@ -63,20 +63,6 @@ class Impressora {
         })
     }
 
-    altera(id, valores, res) {
-        if (valores.data) {
-            valores.data = moment(valores.data, 'DD/MM/YYYY').format('YYYY-MM-DD HH:MM:SS')
-        }
-        const sql = 'UPDATE impressoras SET ? WHERE id=?'
-
-        conexao.query(sql, [valores, id], (erro, resultados) => {
-            if (erro) {
-                res.status(400).json(erro)
-            } else {
-                res.status(200).json({ ...valores, id })
-            }
-        })
-    }
 
     deleta(id, res) {
         const sql = 'DELETE FROM impressoras WHERE id=?'

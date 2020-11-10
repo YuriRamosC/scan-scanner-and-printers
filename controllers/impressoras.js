@@ -13,21 +13,18 @@ module.exports = app => {
     })
 
     app.post('/impressoras', (req, res) => {
-       const impressora = req.body
+        const impressora = req.body
 
-        Impressora.adiciona(impressora, res)
-    }) 
+        Impressora.adiciona(impressora, res);
+    })
+
+    app.get('/impressoraslength',(req, res) => {
+        Impressora.listaOnlyLength(res);
+    } );
     app.get('/impressoras-printwayy', (req, res) => {
-        var impressorasAtualizadas = [];
-        var ok = 0;
-        var resp = 0;
-        
-        Devourer.tratarDados(impressorasAtualizadas)
-        .then(setTimeout(function acao1() {Impressora.listaImpressoras(impressorasAtualizadas, res)}, 6000))
-        .then(res.redirect('/impressoras'));
-  
+        let impressorasAtualizadas = [];
+        Devourer.tratarDados(impressorasAtualizadas);
     });
-
     app.patch('/impressoras/:id', (req, res) => {
         const id = parseInt(req.params.id)
         const valores = req.body
