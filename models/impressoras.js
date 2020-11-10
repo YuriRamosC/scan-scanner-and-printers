@@ -45,7 +45,7 @@ class Impressora {
                 });
             };
 
-            resolve(console.log('cabou'));
+            resolve(impressorasAtualizadas);
         });
     };
 
