@@ -58,20 +58,16 @@ class Devourer {
         }
     }
 
-    async tratarDados(impressorasAtualizadas) {
-        try {
-            impressorasAtualizadas = await this.requestPrintWayy(0, impressorasAtualizadas);
-            impressorasAtualizadas = await this.requestPrintWayy(100, impressorasAtualizadas);
-            impressorasAtualizadas = await this.requestPrintWayy(200, impressorasAtualizadas);
-        } finally {
-            //     console.log('Finally: ' + impressorasAtualizadas.length);
-            // setTimeout(()=> {
-            console.dir('Quantas impressoras tem: ' + impressorasAtualizadas.length);
-            //    for (var row = 0; row < impressorasAtualizadas.length; row++) {
-            //this.adiciona(impressorasAtualizadas[0], res);
-            //   }
-            //  }, 5000);
-        }
+    tratarDados(impressorasAtualizadas) {
+        return new Promise((resolve, reject) => {
+
+            impressorasAtualizadas = this.requestPrintWayy(0, impressorasAtualizadas);
+            impressorasAtualizadas =this.requestPrintWayy(100, impressorasAtualizadas);
+            impressorasAtualizadas =this.requestPrintWayy(200, impressorasAtualizadas);
+            
+            resolve(impressorasAtualizadas);
+        });
+
     };
 }
 module.exports = new Devourer;

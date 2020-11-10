@@ -3,6 +3,7 @@ const conexao = require('../infra/conexao');
 const fs = require('fs');
 const Devourer = require('../controllers/devourer');
 const { waitForDebugger } = require('inspector');
+const { resolve } = require('path');
 
 class Impressora {
     adiciona(impressora, res) {
@@ -31,20 +32,22 @@ class Impressora {
         })
     }
     listaImpressoras(impressorasAtualizadas, res) {
-        console.dir('Quantas impressoras tem: ' + impressorasAtualizadas.length);
-        const sql = 'INSERT INTO impressoras SET ?';
-        for (var row = 0; row < impressorasAtualizadas.length; row++) {
-            conexao.query(sql, impressorasAtualizadas[row], (erro, resultados) => {
-                if (erro) {
-                    res.status(400).json(erro);
-                } else if(row == impressorasAtualizadas.length-1) {
-                    res.status(200);
-                }
-                else {
-                    res.status(201);
-                }
-            });
-        };
+        return new Promise((resolve, reject) => {
+            console.dir('Quantas impressoras tem: ' + impressorasAtualizadas.length);
+            const sql = 'INSERT INTO impressoras SET ?';
+            for (var row = 0; row < impressorasAtualizadas.length; row++) {
+                conexao.query(sql, impressorasAtualizadas[row], (erro, resultados) => {
+                    if (erro) {
+                        res.status(400).json(erro);
+                    }
+                    else {
+                        res.status(201);
+                    }
+                });
+            };
+
+            resolve(res);
+        });
     };
 
     buscaPorId(id, res) {

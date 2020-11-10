@@ -22,10 +22,12 @@ module.exports = app => {
         var ok = 0;
         var resp = 0;
         
-        Devourer.tratarDados(impressorasAtualizadas);
-        setTimeout(function () {Impressora.listaImpressoras(impressorasAtualizadas, res)}, 6000).then(res.redirect('/impressoras'));
-
+        Devourer.tratarDados(impressorasAtualizadas)
+        .then(setTimeout(function acao1() {Impressora.listaImpressoras(impressorasAtualizadas, res)}, 6000))
+        .then(res.redirect('/impressoras'));
+  
     });
+
     app.patch('/impressoras/:id', (req, res) => {
         const id = parseInt(req.params.id)
         const valores = req.body
