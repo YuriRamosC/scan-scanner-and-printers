@@ -62,7 +62,7 @@ class Impressora {
         };
         //  resolve();
         //   });
-        res.redirect('/impressoras');
+        return res.redirect('/impressoras');
     };
 
 

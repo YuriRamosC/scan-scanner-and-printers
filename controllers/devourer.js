@@ -66,8 +66,8 @@ class Devourer {
         return new Promise((resolve, reject) => {
             var result='UM';
             this.requestPrintWayy(0, impressorasAtualizadas, res);
-
-            resolve(console.log(result));
+            console.log(result)
+            resolve();
         });
 
     };
