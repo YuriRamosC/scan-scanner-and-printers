@@ -69,7 +69,7 @@ class Devourer {
 
             this.requestPrintWayy(0, impressorasAtualizadas);
 
-            resolve(impressorasAtualizadas);
+            resolve();
         });
 
     };
