@@ -40,28 +40,29 @@ class Impressora {
 
 
     gravarImpressorasBD(impressorasAtualizadas, res) {
-        return new Promise((resolve, reject) => {
-            console.dir('Quantas impressoras tem: ' + impressorasAtualizadas.length);
-            var resultadosQuant = 0;
-            const sql = 'INSERT INTO impressoras SET ?';
-            for (var row = 0; row < impressorasAtualizadas.length; row++) {
-                conexao.query(sql, impressorasAtualizadas[row], (erro, resultados) => {
-                    if (erro) {
-                        if (erro.code === 'ER_DUP_ENTRY') {
-                            console.log('duplicada!');
-                            // FAZER AQUI O UPDATE AUTOMATICO DOS STATUS DAS IMPRESSORAS
+        // return new Promise((resolve, reject) => {
+        console.dir('Quantas impressoras tem: ' + impressorasAtualizadas.length);
+        var resultadosQuant = 0;
+        const sql = 'INSERT INTO impressoras SET ?';
+        for (var row = 0; row < impressorasAtualizadas.length; row++) {
+            conexao.query(sql, impressorasAtualizadas[row], (erro, resultados) => {
+                if (erro) {
+                    if (erro.code === 'ER_DUP_ENTRY') {
+                       // console.log('duplicada!');
+                        // FAZER AQUI O UPDATE AUTOMATICO DOS STATUS DAS IMPRESSORAS
 
-                        } else {
-                            res.status(400).json(erro);
-                        }
+                    } else {
+                        res.status(400).json(erro);
                     }
-                    else {
-                        //console.log(resultados);
-                    }
-                });
-            };
-            resolve();
-        });
+                }
+                else {
+                    //console.log(resultados);
+                }
+            });
+        };
+        //  resolve();
+        //   });
+        res.redirect('/impressoras');
     };
 
 

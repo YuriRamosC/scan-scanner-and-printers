@@ -21,9 +21,7 @@ module.exports = app => {
     app.get('/impressoras-printwayy', (req, res) => {
         let impressorasAtualizadas = [];
         console.log(impressorasAtualizadas.length);
-        Devourer.tratarDados(impressorasAtualizadas)
-        .then(res.redirect('/impressoras'));
-        //.then(()=> console.log('THEN'));
+        Devourer.tratarDados(impressorasAtualizadas, res);
     });
     app.patch('/impressoras/:id', (req, res) => {
         const id = parseInt(req.params.id)

@@ -10,8 +10,7 @@ const headers = {
 
 
 class Devourer {
-    requestPrintWayy(skip, impressorasAtualizadas) {
-        return new Promise((resolve, reject) => {
+    requestPrintWayy(skip, impressorasAtualizadas, res) {
             let string = '';
             let skipString = '';
             let requestReturn;
@@ -53,23 +52,22 @@ class Devourer {
                     }
                 }
                 if (skip == 0) {
-                    resolve(this.requestPrintWayy(100, impressorasAtualizadas));
+                    this.requestPrintWayy(100, impressorasAtualizadas, res);
                 } else if (skip == 100) {
-                    resolve(this.requestPrintWayy(200, impressorasAtualizadas));
+                    this.requestPrintWayy(200, impressorasAtualizadas, res);
                 } else if (skip == 200) {
-                    resolve(Impressora.gravarImpressorasBD(impressorasAtualizadas, resp));
+                    Impressora.gravarImpressorasBD(impressorasAtualizadas, res);
                 }
                 /// console.log('Essa é a Promise: '+skip);
             });
-        });
     }
 
-    tratarDados(impressorasAtualizadas) {
+    tratarDados(impressorasAtualizadas, res) {
         return new Promise((resolve, reject) => {
+            var result='UM';
+            this.requestPrintWayy(0, impressorasAtualizadas, res);
 
-            this.requestPrintWayy(0, impressorasAtualizadas);
-
-            resolve();
+            resolve(console.log(result));
         });
 
     };
