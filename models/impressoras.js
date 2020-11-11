@@ -47,8 +47,8 @@ class Impressora {
             conexao.query(sql, impressorasAtualizadas[row], (erro, resultados) => {
                 if (erro) {
                     if (erro.code === 'ER_DUP_ENTRY') {
-                    //    console.log('ROW: '+ row);
-                    //    console.dir('DUPLICADA: ' + impressorasAtualizadas[row].id_way);
+                        //    console.log('ROW: '+ row);
+                        //    console.dir('DUPLICADA: ' + impressorasAtualizadas[row].id_way);
                         // FAZER AQUI O UPDATE AUTOMATICO DOS STATUS DAS IMPRESSORAS
                         this.altera(impressorasAtualizadas[row].id_way, impressorasAtualizadas[row], res);
 
@@ -57,7 +57,7 @@ class Impressora {
                     }
                 }
             });
-           // console.log("impressoras duplicadas: "+counter);
+            // console.log("impressoras duplicadas: "+counter);
         };
         return res.redirect('/impressoras');
     };
@@ -82,11 +82,13 @@ class Impressora {
             if (erro) {
                 res.status(400).json(erro)
             } else {
-              /*if(resultados.message) {
-                  console.log(console.log(resultados));
-                  
-              }*/
-              console.log(resultados.message);
+                /*if(resultados.message) {
+                    console.log(console.log(resultados));
+                    
+                }*/
+                if (resultados.changedRows > 0) {
+                    console.log(resultados.message);
+                }
             }
         })
     }
