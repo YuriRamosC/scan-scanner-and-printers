@@ -42,26 +42,23 @@ class Impressora {
     gravarImpressorasBD(impressorasAtualizadas, res) {
         // return new Promise((resolve, reject) => {
         console.dir('Quantas impressoras tem: ' + impressorasAtualizadas.length);
-        var resultadosQuant = 0;
         const sql = 'INSERT INTO impressoras SET ?';
-        for (var row = 0; row < impressorasAtualizadas.length; row++) {
+        for (let row = 0; row < impressorasAtualizadas.length; row++) {
             conexao.query(sql, impressorasAtualizadas[row], (erro, resultados) => {
                 if (erro) {
                     if (erro.code === 'ER_DUP_ENTRY') {
-                       // console.log('duplicada!');
+                    //    console.log('ROW: '+ row);
+                    //    console.dir('DUPLICADA: ' + impressorasAtualizadas[row].id_way);
                         // FAZER AQUI O UPDATE AUTOMATICO DOS STATUS DAS IMPRESSORAS
+                        this.altera(impressorasAtualizadas[row].id_way, impressorasAtualizadas[row], res);
 
                     } else {
                         res.status(400).json(erro);
                     }
                 }
-                else {
-                    //console.log(resultados);
-                }
             });
+           // console.log("impressoras duplicadas: "+counter);
         };
-        //  resolve();
-        //   });
         return res.redirect('/impressoras');
     };
 
@@ -78,7 +75,19 @@ class Impressora {
             }
         })
     }
+    altera(id, valores, res) {
+        const sql = 'UPDATE impressoras SET ? WHERE id_way=?';
 
+        conexao.query(sql, [valores, id], (erro, resultados) => {
+            if (erro) {
+                res.status(400).json(erro)
+            } else {
+
+                console.log({...valores, id});
+            //    res.status(200).json({ ...valores, id })
+            }
+        })
+    }
 
     deleta(id, res) {
         const sql = 'DELETE FROM impressoras WHERE id=?'
