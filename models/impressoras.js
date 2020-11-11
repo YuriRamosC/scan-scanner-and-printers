@@ -82,9 +82,11 @@ class Impressora {
             if (erro) {
                 res.status(400).json(erro)
             } else {
-
-                console.log({...valores, id});
-            //    res.status(200).json({ ...valores, id })
+              /*if(resultados.message) {
+                  console.log(console.log(resultados));
+                  
+              }*/
+              console.log(resultados.message);
             }
         })
     }
