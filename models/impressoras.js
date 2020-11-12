@@ -37,7 +37,18 @@ class Impressora {
         })
     }
 
+    listaOffline(res) {
+        const search = '\'offline\'';
+        const sql = `SELECT * FROM impressoras where status LIKE ${search}`
 
+        conexao.query(sql, (erro, resultados) => {
+            if(erro) {
+                res.status(400).json(erro);
+            } else {
+                res.status(200).json(resultados);
+            }
+        });
+    }
 
     gravarImpressorasBD(impressorasAtualizadas, res) {
         // return new Promise((resolve, reject) => {
@@ -64,10 +75,11 @@ class Impressora {
 
 
     buscaPorId(id, res) {
-        const sql = `SELECT * FROM impressoras WHERE id=${id}`
-
+        const sql = 'SELECT * FROM impressoras WHERE id_way LIKE '+id;
+        console.log(sql);
         conexao.query(sql, (erro, resultados) => {
-            const impressora = resultados[0]
+            const impressora = resultados[0];
+
             if (erro) {
                 res.status(400).json(erro)
             } else {
@@ -87,7 +99,7 @@ class Impressora {
                     
                 }*/
                 if (resultados.changedRows > 0) {
-                    console.log(resultados.message);
+                    console.log('Colunas atualizadas: '+resultados.changedRows);
                 }
             }
         })

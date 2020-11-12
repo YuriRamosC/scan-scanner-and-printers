@@ -16,7 +16,11 @@ module.exports = app => {
         const impressora = req.body
 
         Impressora.adiciona(impressora, res);
-    })
+    });
+
+    app.get('/impressoras-offline', (req, res) => {
+        Impressora.listaOffline(res);
+    });
 
     app.get('/impressoras-printwayy', (req, res) => {
         var impressorasAtualizadas = [];
