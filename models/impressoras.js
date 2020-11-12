@@ -87,10 +87,10 @@ class Impressora {
             }
         })
     }
-    altera(id, valores, res) {
+    altera(id_way, valores, res) {
         const sql = 'UPDATE impressoras SET ? WHERE id_way=?';
 
-        conexao.query(sql, [valores, id], (erro, resultados) => {
+        conexao.query(sql, [valores, id_way], (erro, resultados) => {
             if (erro) {
                 res.status(400).json(erro)
             } else {
