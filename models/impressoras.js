@@ -1,9 +1,10 @@
-const moment = require('moment');
 const conexao = require('../infra/conexao');
 const fs = require('fs');
 const Devourer = require('../controllers/devourer');
 const { waitForDebugger } = require('inspector');
 const { resolve } = require('path');
+require('marko/node-require').install();
+require('marko/express');
 
 class Impressora {
     adiciona(impressora, res) {
@@ -13,11 +14,8 @@ class Impressora {
 
         conexao.query(sql, impressora, (erro, resultados) => {
             if (erro.sqlMessage == '23000') {
-                //         console.log('duplicada!');
+
             } else if (erro) {
-                // console.dir(erro);
-                console.log('aqui');
-                //      res.status(400).json(erro);
             }
             else {
                 res.status(201).json(impressora);
@@ -25,19 +23,19 @@ class Impressora {
         })
 
     }
-    lista(res) {
+    lista(res, callback) {
         const sql = 'SELECT * FROM impressoras'
 
         conexao.query(sql, (erro, resultados) => {
             if (erro) {
                 res.status(400).json(erro)
             } else {
-                res.status(200).json(resultados)
+                callback(resultados);
             }
         })
     }
 
-    listaOffline(res) {
+    listaOffline(res, callback) {
         const search = '\'offline\'';
         const sql = `SELECT * FROM impressoras where status LIKE ${search}`
 
@@ -45,7 +43,7 @@ class Impressora {
             if(erro) {
                 res.status(400).json(erro);
             } else {
-                res.status(200).json(resultados);
+                callback(resultados);
             }
         });
     }
@@ -58,9 +56,6 @@ class Impressora {
             conexao.query(sql, impressorasAtualizadas[row], (erro, resultados) => {
                 if (erro) {
                     if (erro.code === 'ER_DUP_ENTRY') {
-                        //    console.log('ROW: '+ row);
-                        //    console.dir('DUPLICADA: ' + impressorasAtualizadas[row].id_way);
-                        // FAZER AQUI O UPDATE AUTOMATICO DOS STATUS DAS IMPRESSORAS
                         this.altera(impressorasAtualizadas[row].id_way, impressorasAtualizadas[row], res);
 
                     } else {
@@ -68,15 +63,14 @@ class Impressora {
                     }
                 }
             });
-            // console.log("impressoras duplicadas: "+counter);
         };
+
         return res.redirect('/impressoras');
     };
 
 
     buscaPorId(id, res) {
         const sql = 'SELECT * FROM impressoras WHERE id_way LIKE '+id;
-        console.log(sql);
         conexao.query(sql, (erro, resultados) => {
             const impressora = resultados[0];
 
@@ -94,15 +88,12 @@ class Impressora {
             if (erro) {
                 res.status(400).json(erro)
             } else {
-                /*if(resultados.message) {
-                    console.log(console.log(resultados));
-                    
-                }*/
+
                 if (resultados.changedRows > 0) {
-                    console.log('Colunas atualizadas: '+resultados.changedRows);
+                    console.log(valores.serialNumber+' teve valores atualizados');
                 }
             }
-        })
+        });
     }
 
     deleta(id, res) {

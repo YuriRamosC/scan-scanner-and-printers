@@ -1,4 +1,5 @@
 const fs = require('fs');
+const moment = require('moment');
 const request = require('request');
 const Impressora = require('../models/impressoras');
 const hostname = 'https://api.printwayy.com';
@@ -7,7 +8,6 @@ const urlBase = `${hostname}${printers_path}`;
 const headers = {
     'printwayy-key': '5542C0E2-6C0F-43F1-B576-5056CED690B1'
 };
-
 
 class Devourer {
     requestPrintWayy(skip, impressorasAtualizadas, res) {
@@ -36,6 +36,10 @@ class Devourer {
                         if (impressoras[row].ipAdress != 'NULL') {
                             ipFinal = impressoras[row].ipAddress;
                         }
+                        if(impressoras[row].lastCommunication) {
+                            impressoras[row].lastCommunication = moment(impressoras[row].lastCommunication, 'YYYY-MM-DDTHH:mm:ss.sssZ').format('DD-MM-YYYY');
+                        }
+
                         impressorasAtualizadas.push({
                             id_way: impressoras[row].id,
                             tipo_conexao: impressoras[row].type,

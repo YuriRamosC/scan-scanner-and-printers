@@ -1,9 +1,12 @@
 const Impressora = require('../models/impressoras');
 const Devourer = require('./devourer');
+const listaView = require('../views/lista/lista.marko');
 module.exports = app => {
 
     app.get('/impressoras', (req, res) => {
-        Impressora.lista(res);
+        Impressora.lista(res, function(impressoras){
+            res.marko(listaView, {impressoras:impressoras});
+        });
     })
 
     app.get('/impressoras/:id', (req, res) => {
@@ -20,7 +23,10 @@ module.exports = app => {
     });
 
     app.get('/impressoras-offline', (req, res) => {
-        Impressora.listaOffline(res);
+
+        Impressora.listaOffline(res, function(impressoras){
+            res.marko(listaView, {impressoras:impressoras});
+        });
     });
 
     app.get('/impressoras-printwayy', (req, res) => {

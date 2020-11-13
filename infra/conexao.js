@@ -6,6 +6,6 @@ const conexao = mysql.createConnection({
     user: 'root',
     password: '',
     database: 'scan-scanner-and-printers'
-})
+})  
 
 module.exports = conexao;
