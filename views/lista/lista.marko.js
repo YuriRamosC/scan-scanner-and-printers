@@ -23,7 +23,7 @@ function render(input, out, __component, component, state) {
     out.w("Offline");
   }
 
-  out.w("</h1><table id=impressoras class=\"table table-striped table-hover\"><thead class=thead-dark><tr><th>Empresa</th><th>Fabricante</th><th>Modelo</th><th>Número de Série</th><th>Ponto</th><th>IP da Máquina</th><th>Ultima Comunicação</th>");
+  out.w("</h1><table id=impressoras class=\"table table-striped table-hover\"><thead class=thead-light><tr><th>Empresa</th><th>Fabricante</th><th>Modelo</th><th>Número de Série</th><th>Ponto</th><th>IP da Máquina</th><th>Ultima Comunicação</th>");
 
   if (data.offline == "true") {
     out.w("<th>Observações</th>");
