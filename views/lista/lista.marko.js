@@ -7,6 +7,7 @@ var marko_template = module.exports = require("marko/src/html").t(__filename),
     marko_forOf = require("marko/src/runtime/helpers/for-of"),
     helpers_escape_xml = require("marko/src/runtime/html/helpers/escape-xml"),
     marko_escapeXml = helpers_escape_xml.x,
+    marko_classAttr = require("marko/src/runtime/html/helpers/class-attr"),
     marko_attr = require("marko/src/runtime/html/helpers/attr"),
     marko_loadTag = require("marko/src/runtime/helpers/load-tag"),
     init_components_tag = marko_loadTag(require("marko/src/core-tags/components/init-components-tag")),
@@ -16,7 +17,7 @@ var marko_template = module.exports = require("marko/src/html").t(__filename),
 function render(input, out, __component, component, state) {
   var data = input;
 
-  out.w("<html><head><meta charset=utf-8><link rel=stylesheet href=/estatico/css/bootstrap.min.css><link rel=stylesheet href=/estatico/css/fontawesome.min.css><link rel=stylesheet href=/estatico/css/casadocodigo.css></head><body><header class=cabecalhoPrincipal><div class=container><div class=\"row align-items-center\"><div class=\"cabecalhoPrincipal-navegacao col-8\"></div></div></div></header><main class=conteudoPrincipal><div class=container><h1>Impressoras ");
+  out.w("<html><head><meta charset=utf-8><link rel=stylesheet type=text/css href=/estatico/css/lista.css></head><body><header class=cabecalhoPrincipal><div class=container><div class=\"row align-items-center\"><div class=\"cabecalhoPrincipal-navegacao col-8\"></div></div></div></header><main class=conteudoPrincipal><div class=container><h1>Impressoras ");
 
   if (data.offline == "true") {
     out.w("Offline");
@@ -36,6 +37,7 @@ function render(input, out, __component, component, state) {
     var $keyScope$0 = "[" + (($for$0++) + "]");
 
     out.w("<tr" +
+      marko_classAttr("status_" + impressora.scan_status) +
       marko_attr("id", "impressora_" + (impressora.id == null ? "" : impressora.id)) +
       "><td>" +
       marko_escapeXml(impressora.customer_name) +
@@ -63,8 +65,6 @@ function render(input, out, __component, component, state) {
 
     if (data.offline == "true") {
       out.w("<td>" +
-        marko_escapeXml(impressora.scan_status) +
-        "</td><td>" +
         marko_escapeXml(impressora.scan_observation) +
         "</td>");
     }
@@ -76,7 +76,7 @@ function render(input, out, __component, component, state) {
 
   init_components_tag({}, out);
 
-  await_reorderer_tag({}, out, __component, "38");
+  await_reorderer_tag({}, out, __component, "35");
 
   _preferred_script_location_tag({}, out);
 

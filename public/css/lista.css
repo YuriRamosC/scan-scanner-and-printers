@@ -1,0 +1,29 @@
+.status_andre {
+    background-color:rgb(65, 22, 255) ;
+}
+
+.status_devilPrinter {
+    color:white;
+    background-color: rgb(99, 0, 0)
+    
+}
+
+.status_cantCheck {
+    background-color: red;
+}
+
+.status_noMonitoring {
+    background-color: grey;
+}
+
+.status_recentlyLost {
+    background-color: rgb(187, 43, 98);
+}
+
+.status_keven {
+    background-color: orange;
+}
+
+.status_everythingOk {
+    background-color: green;
+}

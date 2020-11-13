@@ -31,8 +31,6 @@ module.exports = app => {
 
     app.get('/impressoras-printwayy', (req, res) => {
         var impressorasAtualizadas = [];
-        console.log(impressorasAtualizadas.length);
-
         Devourer.tratarDados(impressorasAtualizadas, res);
     }); 
     app.patch('/impressoras/:id_way', (req, res) => {

@@ -1,9 +1,7 @@
 <html>
   <head>
     <meta charset="utf-8"/>
-    <link rel="stylesheet" href="/estatico/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="/estatico/css/fontawesome.min.css"/>
-    <link rel="stylesheet" href="/estatico/css/casadocodigo.css"/>
+    <link rel="stylesheet" type="text/css" href="/estatico/css/lista.css">
   </head>
   <body>
     <header class="cabecalhoPrincipal">
@@ -36,7 +34,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr id="impressora_${impressora.id}" for(impressora in data.impressoras)>
+            <tr class=`status_${impressora.scan_status}` id="impressora_${impressora.id}" for(impressora in data.impressoras)>
               <td>${impressora.customer_name}</td>
               <td>${impressora.manufacturer}</td>
               <td>${impressora.model}</td>
@@ -50,7 +48,6 @@
               </else-if>
               <td>${impressora.lastCommunication}</td>
               <if(data.offline == "true")>
-                <td>${impressora.scan_status}</td>
                 <td>${impressora.scan_observation}</td>
               </if>
             </tr>

@@ -5,6 +5,8 @@ const Impressora = require('../models/impressoras');
 const hostname = 'https://api.printwayy.com';
 const printers_path = '/devices/v1/printers';
 const urlBase = `${hostname}${printers_path}`;
+const codename = require('./codename');
+
 const headers = {
     'printwayy-key': '5542C0E2-6C0F-43F1-B576-5056CED690B1'
 };
@@ -26,7 +28,6 @@ class Devourer {
             request({ url: urlFinal, headers: headers }, (err, req, resp) => {
                 if (err) {
                     console.log(err);
-                    alert(err);
                 } else {
                     let biribinha = JSON.parse(resp);
                     var impressoras = biribinha.data;
@@ -45,7 +46,6 @@ class Devourer {
                             impressoras[row].lastCommunication = moment(impressoras[row].lastCommunication, 'YYYY-MM-DDTHH:mm:ss.sssZ')
                             .format('DD-MM-YYYY');
                         }
-
                         impressorasAtualizadas.push({
                             id_way: impressoras[row].id,
                             tipo_conexao: impressoras[row].type,
@@ -57,7 +57,8 @@ class Devourer {
                             ipAddress: ipFinal,
                             manufacturer: impressoras[row].manufacturer,
                             model: impressoras[row].model,
-                            customer_name: customerName
+                            customer_name: customerName,
+                            scan_status: codename.scan_status.everythingOk
                         });
                     }
                 }
@@ -68,13 +69,12 @@ class Devourer {
                 } else if (skip == 200) {
                     Impressora.gravarImpressorasBD(impressorasAtualizadas, res);
                 }
-                /// console.log('Essa é a Promise: '+skip);
             });
     }
 
     tratarDados(impressorasAtualizadas, res) {
         return new Promise((resolve, reject) => {
-            var result='UM';
+            console.log('Atualização iniciada...');
             this.requestPrintWayy(0, impressorasAtualizadas, res);
             resolve();
         });
