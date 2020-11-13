@@ -25,7 +25,7 @@ module.exports = app => {
     app.get('/impressoras-offline', (req, res) => {
 
         Impressora.listaOffline(res, function(impressoras){
-            res.marko(listaView, {impressoras:impressoras});
+            res.marko(listaView, {impressoras:impressoras, offline: 'true'});
         });
     });
 

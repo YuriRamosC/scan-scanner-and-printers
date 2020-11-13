@@ -16,7 +16,19 @@ var marko_template = module.exports = require("marko/src/html").t(__filename),
 function render(input, out, __component, component, state) {
   var data = input;
 
-  out.w("<html><head><meta charset=utf-8><link rel=stylesheet href=/estatico/css/bootstrap.min.css><link rel=stylesheet href=/estatico/css/fontawesome.min.css><link rel=stylesheet href=/estatico/css/casadocodigo.css></head><body><header class=cabecalhoPrincipal><div class=container><div class=\"row align-items-center\"><div class=\"cabecalhoPrincipal-navegacao col-8\"></div></div></div></header><main class=conteudoPrincipal><div class=container><h1>Impressoras Offline</h1><table id=livros class=\"table table-striped table-hover\"><thead class=thead-dark><tr><th>Empresa</th><th>Fabricante</th><th>Modelo</th><th>Número de Série</th><th>Ponto</th><th>IP da Máquina</th><th>Ultima Comunicação</th></tr></thead><tbody>");
+  out.w("<html><head><meta charset=utf-8><link rel=stylesheet href=/estatico/css/bootstrap.min.css><link rel=stylesheet href=/estatico/css/fontawesome.min.css><link rel=stylesheet href=/estatico/css/casadocodigo.css></head><body><header class=cabecalhoPrincipal><div class=container><div class=\"row align-items-center\"><div class=\"cabecalhoPrincipal-navegacao col-8\"></div></div></div></header><main class=conteudoPrincipal><div class=container><h1>Impressoras ");
+
+  if (data.offline == "true") {
+    out.w("Offline");
+  }
+
+  out.w("</h1><table id=livros class=\"table table-striped table-hover\"><thead class=thead-dark><tr><th>Empresa</th><th>Fabricante</th><th>Modelo</th><th>Número de Série</th><th>Ponto</th><th>IP da Máquina</th><th>Ultima Comunicação</th>");
+
+  if (data.offline == "true") {
+    out.w("<th>Status</th><th>Observações</th>");
+  }
+
+  out.w("</tr></thead><tbody>");
 
   var $for$0 = 0;
 
@@ -35,18 +47,36 @@ function render(input, out, __component, component, state) {
       marko_escapeXml(impressora.serialNumber) +
       "</td><td>" +
       marko_escapeXml(impressora.installationPoint) +
-      "</td><td>" +
-      marko_escapeXml(impressora.ipAddress) +
-      "</td><td>" +
+      "</td>");
+
+    if (impressora.tipo_conexao == "usb") {
+      out.w("<td>USB</td>");
+    } else if (impressora.tipo_conexao == "network") {
+      out.w("<td>" +
+        marko_escapeXml(impressora.ipAddress) +
+        "</td>");
+    }
+
+    out.w("<td>" +
       marko_escapeXml(impressora.lastCommunication) +
-      "</td><td></td></tr>");
+      "</td>");
+
+    if (data.offline == "true") {
+      out.w("<td>" +
+        marko_escapeXml(impressora.scan_status) +
+        "</td><td>" +
+        marko_escapeXml(impressora.scan_observation) +
+        "</td>");
+    }
+
+    out.w("</tr>");
   });
 
   out.w("</tbody></table></div></main>");
 
   init_components_tag({}, out);
 
-  await_reorderer_tag({}, out, __component, "34");
+  await_reorderer_tag({}, out, __component, "38");
 
   _preferred_script_location_tag({}, out);
 

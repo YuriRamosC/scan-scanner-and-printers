@@ -8,7 +8,12 @@ const urlBase = `${hostname}${printers_path}`;
 const headers = {
     'printwayy-key': '5542C0E2-6C0F-43F1-B576-5056CED690B1'
 };
-
+/*
+    Essa classe consome a API, por isso esse nome de Devourer.
+    Ela recebe os dados enviados em JSON e grava em uma Array,
+    essa Array é tratada em sua respectiva classe Model, que
+    faz o insert no banco de dados.
+*/
 class Devourer {
     requestPrintWayy(skip, impressorasAtualizadas, res) {
             let string = '';
@@ -37,7 +42,8 @@ class Devourer {
                             ipFinal = impressoras[row].ipAddress;
                         }
                         if(impressoras[row].lastCommunication) {
-                            impressoras[row].lastCommunication = moment(impressoras[row].lastCommunication, 'YYYY-MM-DDTHH:mm:ss.sssZ').format('DD-MM-YYYY');
+                            impressoras[row].lastCommunication = moment(impressoras[row].lastCommunication, 'YYYY-MM-DDTHH:mm:ss.sssZ')
+                            .format('DD-MM-YYYY');
                         }
 
                         impressorasAtualizadas.push({
@@ -70,7 +76,6 @@ class Devourer {
         return new Promise((resolve, reject) => {
             var result='UM';
             this.requestPrintWayy(0, impressorasAtualizadas, res);
-            console.log(result)
             resolve();
         });
 
