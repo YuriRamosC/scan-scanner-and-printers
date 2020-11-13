@@ -57,8 +57,8 @@ class Devourer {
                             ipAddress: ipFinal,
                             manufacturer: impressoras[row].manufacturer,
                             model: impressoras[row].model,
-                            customer_name: customerName,
-                            scan_status: codename.scan_status.everythingOk
+                            customer_name: customerName
+                         //   scan_status: codename.scan_status.everythingOk
                         });
                     }
                 }

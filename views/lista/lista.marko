@@ -1,15 +1,11 @@
 <html>
   <head>
     <meta charset="utf-8"/>
-    <link rel="stylesheet" type="text/css" href="/estatico/css/lista.css">
   </head>
   <body>
     <header class="cabecalhoPrincipal">
-      <div class="container">
-        <div class="row align-items-center">
-          <div class="cabecalhoPrincipal-navegacao col-8"/>
-        </div>
-      </div>
+      <include-html("../menu.html")/>
+      <link rel="stylesheet" type="text/css" href="/estatico/css/lista.css"/>
     </header>
     <main class="conteudoPrincipal">
       <div class="container">
@@ -17,7 +13,7 @@
           Impressoras
           <if(data.offline == "true")>Offline</if>
         </h1>
-        <table id="livros" class="table table-striped table-hover">
+        <table id="impressoras" class="table table-striped table-hover">
           <thead class="thead-dark">
             <tr>
               <th>Empresa</th>
@@ -28,14 +24,15 @@
               <th>IP da Máquina</th>
               <th>Ultima Comunicação</th>
               <if(data.offline == "true")>
-                <th>Status</th>
                 <th>Observações</th>
               </if>
             </tr>
           </thead>
           <tbody>
             <tr class=`status_${impressora.scan_status}` id="impressora_${impressora.id}" for(impressora in data.impressoras)>
-              <td>${impressora.customer_name}</td>
+              <td>
+                ${impressora.customer_name}<if(impressora.customer_name == "")>Não esta no cliente</if>
+              </td>
               <td>${impressora.manufacturer}</td>
               <td>${impressora.model}</td>
               <td>${impressora.serialNumber}</td>
@@ -48,7 +45,9 @@
               </else-if>
               <td>${impressora.lastCommunication}</td>
               <if(data.offline == "true")>
-                <td>${impressora.scan_observation}</td>
+                <td>
+                  ${impressora.scan_observation}<if(impressora.scan_observation == null)>empty</if>
+                </td>
               </if>
             </tr>
           </tbody>

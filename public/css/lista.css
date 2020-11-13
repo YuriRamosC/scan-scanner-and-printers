@@ -1,29 +1,29 @@
 .status_andre {
-    background-color:rgb(65, 22, 255) ;
+    background-color:rgb(65, 22, 255) !important;
 }
 
 .status_devilPrinter {
-    color:white;
-    background-color: rgb(99, 0, 0)
+    color:white  !important;
+    background-color: rgb(99, 0, 0) !important;
     
 }
 
 .status_cantCheck {
-    background-color: red;
+    background-color: red !important;
 }
 
 .status_noMonitoring {
-    background-color: grey;
+    background-color: grey !important;
 }
 
 .status_recentlyLost {
-    background-color: rgb(187, 43, 98);
+    background-color: rgb(187, 43, 98) !important;
 }
 
 .status_keven {
-    background-color: orange;
+    background-color: orange !important;
 }
 
 .status_everythingOk {
-    background-color: green;
+    background-color: green !important;
 }

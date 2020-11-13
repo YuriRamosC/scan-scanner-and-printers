@@ -17,16 +17,16 @@ var marko_template = module.exports = require("marko/src/html").t(__filename),
 function render(input, out, __component, component, state) {
   var data = input;
 
-  out.w("<html><head><meta charset=utf-8><link rel=stylesheet type=text/css href=/estatico/css/lista.css></head><body><header class=cabecalhoPrincipal><div class=container><div class=\"row align-items-center\"><div class=\"cabecalhoPrincipal-navegacao col-8\"></div></div></div></header><main class=conteudoPrincipal><div class=container><h1>Impressoras ");
+  out.w("<html><head><meta charset=utf-8></head><body><header class=cabecalhoPrincipal><!DOCTYPE html>\r\n<!-- Created By CodingNepal -->\r\n<html lang=\"en\" dir=\"ltr\">\r\n\r\n<head>\r\n  <meta charset=\"utf-8\">\r\n  <!-- Somehow I got an error, so I comment the title, just uncomment to show -->\r\n  <title>Canary Tasks</title>\r\n  <link rel=\"stylesheet\" href=\"/estatico/css/bootstrap.min.css\" />\r\n  <link rel=\"stylesheet\" href=\"/estatico/css/fontawesome.min.css\" />\r\n  <link rel=\"stylesheet\" href=\"/estatico/css/scan-scanners-and-printers.css\">\r\n  <link href = \"https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css\"\r\n  rel = \"stylesheet\">\r\n<script src = \"https://code.jquery.com/jquery-1.10.2.js\"></script>\r\n<script src = \"https://code.jquery.com/ui/1.10.4/jquery-ui.js\"></script>\r\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\r\n  <script src=\"https://kit.fontawesome.com/a076d05399.js\"></script>\r\n</head>\r\n\r\n  <nav>\r\n    <div class=\"menu-icon\">\r\n      <span class=\"fas fa-bars\"></span></div>\r\n    <div class=\"logo\">\r\n      Scan Scanners and Printers</div>\r\n    <div class=\"nav-items\">\r\n      <li><a href=\"/\">Home</a></li>\r\n      <li><a href=\"/impressoras\">Todas</a></li>\r\n      <li><a href=\"/impressoras-offline\">Offlines</a></li>\r\n      <li><a href=\"/impressoras-printwayy\">Atualizar</a></li>\r\n      <li><a href=\"#\">Contact</a></li>\r\n      <li><a href=\"#\">Feedback</a></li>\r\n    </div>\r\n  </nav>\r\n  <script>\r\n    const menuBtn = document.querySelector(\".menu-icon span\");\r\n    const searchBtn = document.querySelector(\".search-icon\");\r\n    const cancelBtn = document.querySelector(\".cancel-icon\");\r\n    const items = document.querySelector(\".nav-items\");\r\n    const form = document.querySelector(\"form\");\r\n    menuBtn.onclick = () => {\r\n      items.classList.add(\"active\");\r\n      menuBtn.classList.add(\"hide\");\r\n      searchBtn.classList.add(\"hide\");\r\n      cancelBtn.classList.add(\"show\");\r\n    }\r\n    cancelBtn.onclick = () => {\r\n      items.classList.remove(\"active\");\r\n      menuBtn.classList.remove(\"hide\");\r\n      searchBtn.classList.remove(\"hide\");\r\n      cancelBtn.classList.remove(\"show\");\r\n      form.classList.remove(\"active\");\r\n      cancelBtn.style.color = \"#ff3d00\";\r\n    }\r\n    searchBtn.onclick = () => {\r\n      form.classList.add(\"active\");\r\n      searchBtn.classList.add(\"hide\");\r\n      cancelBtn.classList.add(\"show\");\r\n    }\r\n  </script>\r\n\r\n\r\n</html><link rel=stylesheet type=text/css href=/estatico/css/lista.css></header><main class=conteudoPrincipal><div class=container><h1>Impressoras ");
 
   if (data.offline == "true") {
     out.w("Offline");
   }
 
-  out.w("</h1><table id=livros class=\"table table-striped table-hover\"><thead class=thead-dark><tr><th>Empresa</th><th>Fabricante</th><th>Modelo</th><th>Número de Série</th><th>Ponto</th><th>IP da Máquina</th><th>Ultima Comunicação</th>");
+  out.w("</h1><table id=impressoras class=\"table table-striped table-hover\"><thead class=thead-dark><tr><th>Empresa</th><th>Fabricante</th><th>Modelo</th><th>Número de Série</th><th>Ponto</th><th>IP da Máquina</th><th>Ultima Comunicação</th>");
 
   if (data.offline == "true") {
-    out.w("<th>Status</th><th>Observações</th>");
+    out.w("<th>Observações</th>");
   }
 
   out.w("</tr></thead><tbody>");
@@ -40,8 +40,13 @@ function render(input, out, __component, component, state) {
       marko_classAttr("status_" + impressora.scan_status) +
       marko_attr("id", "impressora_" + (impressora.id == null ? "" : impressora.id)) +
       "><td>" +
-      marko_escapeXml(impressora.customer_name) +
-      "</td><td>" +
+      marko_escapeXml(impressora.customer_name));
+
+    if (impressora.customer_name == "") {
+      out.w("Não esta no cliente");
+    }
+
+    out.w("</td><td>" +
       marko_escapeXml(impressora.manufacturer) +
       "</td><td>" +
       marko_escapeXml(impressora.model) +
@@ -65,8 +70,13 @@ function render(input, out, __component, component, state) {
 
     if (data.offline == "true") {
       out.w("<td>" +
-        marko_escapeXml(impressora.scan_observation) +
-        "</td>");
+        marko_escapeXml(impressora.scan_observation));
+
+      if (impressora.scan_observation == null) {
+        out.w("empty");
+      }
+
+      out.w("</td>");
     }
 
     out.w("</tr>");
@@ -76,7 +86,7 @@ function render(input, out, __component, component, state) {
 
   init_components_tag({}, out);
 
-  await_reorderer_tag({}, out, __component, "35");
+  await_reorderer_tag({}, out, __component, "31");
 
   _preferred_script_location_tag({}, out);
 
