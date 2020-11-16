@@ -50,13 +50,13 @@ function render(input, out, __component, component, state) {
     marko_mergeAttrs(data.impressora.scan_status == "everythingOk" ? "selected" : "", {
       value: "everythingOk"
     }) +
-    ">Não precisa conferir</option></select></div></div><div class=form-group><label for=descricao>Observações:</label><textarea cols=20 rows=10 id=scan_observation name=scan_observation placeholder=\"Adicione observações...\" class=form-control>" +
+    ">Não precisa conferir</option><option value>Limpar Status</option></select></div></div><div class=form-group><label for=descricao>Observações:</label><textarea cols=20 rows=10 id=scan_observation name=scan_observation placeholder=\"Adicione observações...\" class=form-control>" +
     marko_escapeXml(data.impressora.scan_observation) +
     "</textarea></div><input type=submit value=Salvar class=\"btn btn-primary\"></form></div></main>");
 
   init_components_tag({}, out);
 
-  await_reorderer_tag({}, out, __component, "24");
+  await_reorderer_tag({}, out, __component, "25");
 
   _preferred_script_location_tag({}, out);
 

@@ -38,7 +38,7 @@ class Impressora {
 
     listaOffline(res, callback) {
         const search = '\'offline\'';
-        const sql = `SELECT * FROM impressoras where status LIKE ${search}`
+        const sql = `SELECT * FROM impressoras where status LIKE ${search} ORDER BY scan_status ASC, lastCommunication DESC`
 
         conexao.query(sql, (erro, resultados) => {
             if(erro) {

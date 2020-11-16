@@ -44,7 +44,7 @@ class Devourer {
                         }
                         if(impressoras[row].lastCommunication) {
                             impressoras[row].lastCommunication = moment(impressoras[row].lastCommunication, 'YYYY-MM-DDTHH:mm:ss.sssZ')
-                            .format('DD-MM-YYYY');
+                            .format('YYYY-MM-DD');
                         }
                         impressorasAtualizadas.push({
                             id_way: impressoras[row].id,
