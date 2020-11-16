@@ -6,7 +6,8 @@
     </header>
     <main class="conteudoPrincipal">
       <div class="container">
-        <h1>Alterar Impressora ${data.impressora.serialNumber}</h1>
+        <h2>Alterar Impressora ${data.impressora.serialNumber} ( ${data.impressora.manufacturer} - ${data.impressora.model} )</h2>
+        <h4>${data.impressora.customer_name}</h4>
         <form action="/impressoras-offline" method="post">
           <div if(data.impressora.id)>
             <input type="hidden" name="_method" value="PUT"/>
@@ -15,13 +16,13 @@
           <div class="row">
             <div class="form-group col">
               <select class="form-control" id="scan_status" name="scan_status" placeholder="Selecione o Status">
+                <option value='' ${data.impressora.scan_status == '' ? `selected` : ``}>Nenhum</option>
                   <option value='andre' ${data.impressora.scan_status == 'andre' ? `selected` : ``}>André</option>
                   <option value='cantCheck'  ${data.impressora.scan_status == "cantCheck" ? `selected` : ``}>Impossível checagem presencial</option>
                   <option value='noMonitoring'  ${data.impressora.scan_status == "noMonitoring" ? `selected` : ``}>Sem monitoramento</option>
                   <option value='recentlyLost'  ${data.impressora.scan_status == "recentlyLost" ? `selected` : ``}>Novo (em observação)</option>
                   <option value='keven'  ${data.impressora.scan_status == "keven" ? `selected` : ``}>Passado para Keven</option>
                   <option value='everythingOk'  ${data.impressora.scan_status == "everythingOk" ? `selected` : ``}>Não precisa conferir</option>
-                  <option value=''>Limpar Status</option>
                 </select>
             </div>
           </div>
