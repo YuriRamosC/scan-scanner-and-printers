@@ -49,7 +49,10 @@
               <else-if(impressora.tipo_conexao == "network")>
                 <td>${impressora.ipAddress}</td>
               </else-if>
-              <td>${impressora.lastCommunication}</td>
+              <else>
+                <td>Unknown</td>
+              </else>
+              <td>${impressora.lastCommunication}<if(!impressora.lastCommunication)>nulo</if></td>
               <if(data.offline == "true")>
                 <td>
                     <a class="button-link" href=`/impressoras/form/${impressora.id_way}`>Editar</a>

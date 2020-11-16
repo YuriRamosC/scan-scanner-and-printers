@@ -103,7 +103,7 @@ class Impressora {
                     else if (impressoraTest.status == 'online' && valores.status == 'offline') {
                         console.log(valores.serialNumber + 'ficou offline')
                     }
-                    console.log('...Valores atualizados');
+                  //  console.log('...Valores atualizados');
                 }
             }
         });
