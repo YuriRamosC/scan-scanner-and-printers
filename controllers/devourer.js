@@ -47,10 +47,6 @@ class Devourer {
                             .format('YYYY-MM-DD');
                         }
                         //estou aqui
-                        if(impressoras[row].status =='online' && impressoras[row].scan_status!='everythingOk' && impressoras[row].scan_status != null) {
-                            impressoras[row].scan_status = null;
-                            console.log(impressoras[row].serialNumber+ ' status limpo');
-                        }
                         impressorasAtualizadas.push({
                             id_way: impressoras[row].id,
                             tipo_conexao: impressoras[row].type,

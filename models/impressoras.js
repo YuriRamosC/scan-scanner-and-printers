@@ -50,13 +50,15 @@ class Impressora {
     }
 
     gravarImpressorasBD(impressorasAtualizadas, res) {
-        // return new Promise((resolve, reject) => {
-        console.dir('Quantas impressoras tem: ' + impressorasAtualizadas.length);
         const sql = 'INSERT INTO impressoras SET ?';
         for (let row = 0; row < impressorasAtualizadas.length; row++) {
             conexao.query(sql, impressorasAtualizadas[row], (erro, resultados) => {
                 if (erro) {
                     if (erro.code === 'ER_DUP_ENTRY') {
+                        if (impressorasAtualizadas[row].status == 'online' && impressorasAtualizadas[row].scan_status != 'everythingOk' && impressorasAtualizadas[row].scan_status != null) {
+                            impressorasAtualizadas[row].scan_status = '';
+                            console.log(impressorasAtualizadas[row].serialNumber + ' status limpo');
+                        }
                         this.altera(impressorasAtualizadas[row].id_way, impressorasAtualizadas[row], res);
 
                     } else {
@@ -93,10 +95,13 @@ class Impressora {
 
                 if (resultados.changedRows > 0) {
                     if (impressoraTest.status == 'offline' && valores.status == 'online') {
-                        console.log(valores.serialNumber + ' ficou online');
+                        console.log(impressoraTest.serialNumber + ' ficou online, status limpo');
+                        if (impressoraTest.scan_status != 'everythingOk' && impressoraTest.scan_status != null) {
+                            this.altera(id_way, { scan_status: 'null' }, res);
+                        }
                     }
-                    else if (impressoraTest.status == 'online' && valores.status == 'offline'){
-                        console.log(valores.serialNumber+ 'ficou offline')
+                    else if (impressoraTest.status == 'online' && valores.status == 'offline') {
+                        console.log(valores.serialNumber + 'ficou offline')
                     }
                     console.log('...Valores atualizados');
                 }
