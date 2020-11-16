@@ -2,6 +2,7 @@ const Impressora = require('../models/impressoras');
 const Devourer = require('./devourer');
 const listaView = require('../views/lista/lista.marko');
 const formView = require('../views/form/form.marko');
+const countersView = require('../views/counters/counters.marko');
 module.exports = app => {
 
     app.get('/impressoras', (req, res) => {
@@ -47,6 +48,12 @@ module.exports = app => {
     app.get('/impressoras/form/:id_way', (req, res) => {
         Impressora.buscaPorId(req.params.id_way, res, function(impressora){
             res.marko(formView, {impressora: impressora});
+        });
+    });
+
+    app.get('/impressoras-monitoramento', (req, res) => {
+        Devourer.buscarCounters(res, function(impressoras){
+            res.marko(countersView, {impressoras:impressoras});
         });
     });
 }
