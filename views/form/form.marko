@@ -16,14 +16,14 @@
           <div class="row">
             <div class="form-group col">
               <select class="form-control" id="scan_status" name="scan_status" placeholder="Selecione o Status">
-                <option value='' ${data.impressora.scan_status == '' ? `selected` : ``}>Nenhum</option>
-                  <option value='andre' ${data.impressora.scan_status == 'andre' ? `selected` : ``}>André</option>
-                  <option value='cantCheck'  ${data.impressora.scan_status == "cantCheck" ? `selected` : ``}>Impossível checagem presencial</option>
-                  <option value='noMonitoring'  ${data.impressora.scan_status == "noMonitoring" ? `selected` : ``}>Sem monitoramento</option>
-                  <option value='recentlyLost'  ${data.impressora.scan_status == "recentlyLost" ? `selected` : ``}>Novo (em observação)</option>
-                  <option value='keven'  ${data.impressora.scan_status == "keven" ? `selected` : ``}>Passado para Keven</option>
-                  <option value='everythingOk'  ${data.impressora.scan_status == "everythingOk" ? `selected` : ``}>Não precisa conferir</option>
-                </select>
+                <option value="" ${data.impressora.scan_status == "" ? `selected` : ``}>Nenhum</option>
+                <option value="andre" ${data.impressora.scan_status == "andre" ? `selected` : ``}>André</option>
+                <option value="cantCheck" ${data.impressora.scan_status == "cantCheck" ? `selected` : ``}>Impossível checagem presencial</option>
+                <option value="noMonitoring" ${data.impressora.scan_status == "noMonitoring" ? `selected` : ``}>Sem monitoramento</option>
+                <option value="recentlyLost" ${data.impressora.scan_status == "recentlyLost" ? `selected` : ``}>Novo (em observação)</option>
+                <option value="keven" ${data.impressora.scan_status == "keven" ? `selected` : ``}>Passado para Keven</option>
+                <option value="everythingOk" ${data.impressora.scan_status == "everythingOk" ? `selected` : ``}>Não precisa conferir</option>
+              </select>
             </div>
           </div>
           <div class="form-group">
