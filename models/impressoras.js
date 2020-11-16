@@ -69,15 +69,14 @@ class Impressora {
     };
 
 
-    buscaPorId(id, res) {
-        const sql = 'SELECT * FROM impressoras WHERE id_way LIKE '+id;
+    buscaPorId(id, res, callback) {
+        const sql = `SELECT * FROM impressoras WHERE id_way LIKE \'${id}\'`;
         conexao.query(sql, (erro, resultados) => {
             const impressora = resultados[0];
-
             if (erro) {
-                res.status(400).json(erro)
+                res.status(400).json(erro);
             } else {
-                res.status(200).json(impressora)
+                callback(impressora);
             }
         })
     }
@@ -90,7 +89,7 @@ class Impressora {
             } else {
 
                 if (resultados.changedRows > 0) {
-                    console.log(valores.serialNumber+' teve valores atualizados');
+                    console.log('Valores atualizados');
                 }
             }
         });

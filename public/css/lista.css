@@ -1,29 +1,35 @@
 .status_andre {
-    background-color:rgb(65, 22, 255) !important;
+    border-left-style: solid;
+    border-left-color: pink !important;
 }
 
 .status_devilPrinter {
-    color:white  !important;
-    background-color: rgb(99, 0, 0) !important;
-    
+    color: white !important;
+    border-left-style: solid;
+    border-left-color: rgb(99, 0, 0) !important;
 }
 
 .status_cantCheck {
-    background-color: red !important;
+    border-left-style: solid;
+    border-left-color: red !important;
 }
 
 .status_noMonitoring {
-    background-color: grey !important;
+    border-left-style: solid;
+    border-left-color: grey !important;
 }
 
 .status_recentlyLost {
-    background-color: rgb(187, 43, 98) !important;
+    border-left-style: solid;
+    border-left-color: rgb(187, 43, 98) !important;
 }
 
 .status_keven {
-    background-color: orange !important;
+    border-left-style: solid;
+    border-left-color: orange !important;
 }
 
 .status_everythingOk {
-    background-color: green !important;
+    border-left-style: solid;
+    border-left-color: green !important;
 }

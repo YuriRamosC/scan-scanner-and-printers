@@ -1,6 +1,7 @@
 const Impressora = require('../models/impressoras');
 const Devourer = require('./devourer');
 const listaView = require('../views/lista/lista.marko');
+const formView = require('../views/form/form.marko');
 module.exports = app => {
 
     app.get('/impressoras', (req, res) => {
@@ -28,21 +29,24 @@ module.exports = app => {
             res.marko(listaView, {impressoras:impressoras, offline: 'true'});
         });
     });
+    //finaliza a edição
+    app.post('/impressoras-offline', (req, res) => {
+        const valores = {scan_status: req.body.scan_status, scan_observation: req.body.scan_observation}
+        console.dir(valores);
+        Impressora.altera(req.body.id_way, valores, res);
+        res.redirect('/impressoras-offline');
+    });
+
 
     app.get('/impressoras-printwayy', (req, res) => {
         var impressorasAtualizadas = [];
         Devourer.tratarDados(impressorasAtualizadas, res);
     }); 
-    app.patch('/impressoras/:id_way', (req, res) => {
-        const id_way = parseInt(req.params.id_way)
-        const valores = req.body
 
-        Impressora.altera(id_way, valores, res)
-    })
-
-    app.delete('/impressoras/:id', (req, res) => {
-        const id = parseInt(req.params.id)
-
-        Impressora.deleta(id, res)
-    })
+    //edição dos status
+    app.get('/impressoras/form/:id_way', (req, res) => {
+        Impressora.buscaPorId(req.params.id_way, res, function(impressora){
+            res.marko(formView, {impressora: impressora});
+        });
+    });
 }
