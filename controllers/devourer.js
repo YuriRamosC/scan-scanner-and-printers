@@ -46,8 +46,9 @@ class Devourer {
                             impressoras[row].lastCommunication = moment(impressoras[row].lastCommunication, 'YYYY-MM-DDTHH:mm:ss.sssZ')
                             .format('YYYY-MM-DD');
                         }
+                        //estou aqui
                         if(impressoras[row].status =='online' && impressoras[row].scan_status!='everythingOk' && impressoras[row].scan_status != null) {
-                            impressoras[row].scan_status = '';
+                            impressoras[row].scan_status = null;
                             console.log(impressoras[row].serialNumber+ ' status limpo');
                         }
                         impressorasAtualizadas.push({
