@@ -41,7 +41,7 @@ class Impressora {
         const sql = `SELECT * FROM impressoras where status LIKE ${search} ORDER BY scan_status ASC, lastCommunication DESC`
 
         conexao.query(sql, (erro, resultados) => {
-            if(erro) {
+            if (erro) {
                 res.status(400).json(erro);
             } else {
                 callback(resultados);
@@ -82,13 +82,22 @@ class Impressora {
     }
     altera(id_way, valores, res) {
         const sql = 'UPDATE impressoras SET ? WHERE id_way=?';
-
+        var impressoraTest = {};
+        this.buscaPorId(id_way, res, function (impressora) {
+            impressoraTest = impressora;
+        });
         conexao.query(sql, [valores, id_way], (erro, resultados) => {
             if (erro) {
                 res.status(400).json(erro)
             } else {
 
                 if (resultados.changedRows > 0) {
+                    if (impressoraTest.status == 'offline' && valores.status == 'online') {
+                        console.log(valores.serialNumber + ' ficou online');
+                    }
+                    else if (impressoraTest.status == 'online' && valores.status == 'offline'){
+                        console.log(valores.serialNumber+ 'ficou offline')
+                    }
                     console.log('Valores atualizados');
                 }
             }
