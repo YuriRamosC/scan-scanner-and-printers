@@ -25,7 +25,7 @@ function render(input, out, __component, component, state) {
     out.w("Offline");
   }
 
-  out.w("</h1><table id=impressoras class=\"table table-striped table-hover\"><thead class=thead-light><tr><th>Empresa</th><th>Fabricante</th><th>Modelo</th><th>Número de Série</th><th>Ponto</th><th>IP da Máquina</th><th>Ultima Comunicação</th>");
+  out.w("</h1><table id=impressoras class=\"table table-striped table-hover\"><thead class=thead-light><tr><th>ID_WAY</th><th>Total Impresso</th><th>Modelo</th><th>Número de Série</th><th>Ponto</th><th>IP da Máquina</th><th>Ultima Comunicação</th>");
 
   if (data.offline == "true") {
     out.w("<th>Alterar Status</th>");
@@ -43,14 +43,9 @@ function render(input, out, __component, component, state) {
       marko_attr("title", (impressora.scan_status + " - ") + impressora.scan_observation) +
       marko_attr("id", "impressora_" + (impressora.id == null ? "" : impressora.id)) +
       "><td>" +
-      marko_escapeXml(impressora.customer_name));
-
-    if (impressora.customer_name == "") {
-      out.w("Não esta no cliente");
-    }
-
-    out.w("</td><td>" +
-      marko_escapeXml(impressora.manufacturer) +
+      marko_escapeXml(impressora.id_way) +
+      "</td><td>" +
+      marko_escapeXml(impressora.total) +
       "</td><td>" +
       marko_escapeXml(impressora.model) +
       "</td><td>" +

@@ -52,8 +52,10 @@ module.exports = app => {
     });
 
     app.get('/impressoras-monitoramento', (req, res) => {
-        Devourer.buscarCounters(res, function(impressoras){
-            res.marko(countersView, {impressoras:impressoras});
+        Devourer.buscarCounters(res, function(contadoresResult){
+            console.log('oi')
+            console.log(contadoresResult);
+            res.marko(countersView, {impressoras:contadoresResult});
         });
     });
 }

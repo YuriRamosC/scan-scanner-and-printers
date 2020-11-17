@@ -7,6 +7,7 @@ const hostname = 'https://api.printwayy.com';
 const printers_path = '/devices/v1/printers';
 const urlBase = `${hostname}${printers_path}`;
 const codename = require('./codename');
+const { resolve } = require('path');
 const headers = {
     'printwayy-key': '5542C0E2-6C0F-43F1-B576-5056CED690B1'
 };
@@ -23,7 +24,7 @@ const contadores = ['17a99399-3158-4516-ae02-65835302ea6c', '1953dbda-8cd7-44c2-
 // urlBase+'/'+contadores[row] +'/counters'
 // headers: headers
 class Devourer {
-    buscarCounters(res, contadoresResult) {
+    buscarCounters(res, callback) {
         // Nesse método, estarei testando/utilizando a library axios, em vez da library 'request',
         // em breve todos os métodos que  utilizam o request, serão atualizados.
         var contadoresResult = [];
@@ -39,10 +40,9 @@ class Devourer {
                 }));
         }
 
-        contadoresResult = Promise.all(promises).then((result) => {
-            return result;
+        Promise.all(promises).then((result) => {
+            return callback(result);
         });
-        return contadoresResult;
     }
 
     requestPrintWayy(skip, impressorasAtualizadas, res) {
