@@ -31,16 +31,18 @@ class Devourer {
         for (var row = 0; row < contadores.length; row++) {
             promises.push(axios.get(urlBase + '/' + contadores[row] + '/counters', { headers: headers })
                 .then(function (response) {
-                    console.log(contadores[row]);
-                    return response.data[0].totalCount + response.data[1].totalCount;
+                    //id_way é o id do objeto, que ele tira do axios, pela url do request.
+                    var id_way;
+                    id_way = response.config.url.replace('https://api.printwayy.com/devices/v1/printers', '');
+                    id_way = id_way.replace('/counters', '');
+                    return {id_way: id_way, total: response.data[0].totalCount + response.data[1].totalCount};
                 }));
         }
 
-        Promise.all(promises).then((result) => {
-            console.dir(result);
-            console.log('\n---------------------------------');
+        contadoresResult = Promise.all(promises).then((result) => {
+            return result;
         });
-        //  return contadoresResult;
+        return contadoresResult;
     }
 
     requestPrintWayy(skip, impressorasAtualizadas, res) {
