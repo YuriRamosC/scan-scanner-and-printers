@@ -4,6 +4,8 @@
   "description": "Initialized",
   "main": "index.js",
   "dependencies": {
+    "async": "^3.2.0",
+    "axios": "^0.21.0",
     "consign": "^0.1.6",
     "express": "^4.17.1",
     "https": "^1.0.0",
