@@ -113,7 +113,7 @@ nav .search-icon{
     height: 100%;
     padding: 10px 50px 0 50px;
     text-align: center;
-    background: #0015b6;
+    background: #264d81;
     display: inline-block;
     transition: left 0.3s ease;
   }
@@ -239,7 +239,7 @@ nav .logo.space{
 }
 
 .button-link{
-  color: #0015b6;
+  color: #264d81;
   font-family: 'Montserrat', sans-serif;
   font-weight: bold;
 }
