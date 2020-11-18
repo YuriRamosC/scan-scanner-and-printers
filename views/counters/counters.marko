@@ -24,40 +24,14 @@
             <tr>
               <th>ID_WAY</th>
               <th>Total Impresso</th>
-              <th>Modelo</th>
               <th>Número de Série</th>
-              <th>Ponto</th>
-              <th>IP da Máquina</th>
-              <th>Ultima Comunicação</th>
-              <if(data.offline == "true")>
-                <th>Alterar Status</th>
-              </if>
             </tr>
           </thead>
           <tbody>
-            <tr class=`status_${impressora.scan_status}` title=`${impressora.scan_status} - ${impressora.scan_observation}` id="impressora_${impressora.id}" for(impressora in data.impressoras)>
-              <td>
-                ${impressora.id_way}
-              </td>
+            <tr id="impressora_${impressora.id}" for(impressora in data.impressoras)>
+              <td>${impressora.id_way}</td>
               <td>${impressora.total}</td>
-              <td>${impressora.model}</td>
               <td>${impressora.serialNumber}</td>
-              <td>${impressora.installationPoint}</td>
-              <if(impressora.tipo_conexao == "usb")>
-                <td>USB</td>
-              </if>
-              <else-if(impressora.tipo_conexao == "network")>
-                <td>${impressora.ipAddress}</td>
-              </else-if>
-              <else>
-                <td>Unknown</td>
-              </else>
-              <td>${impressora.lastCommunication}<if(!impressora.lastCommunication)>nulo</if></td>
-              <if(data.offline == "true")>
-                <td>
-                    <a class="button-link" href=`/impressoras/form/${impressora.id_way}`>Editar</a>
-                </td>
-              </if>
             </tr>
           </tbody>
         </table>

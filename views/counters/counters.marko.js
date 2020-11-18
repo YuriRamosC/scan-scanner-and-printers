@@ -8,7 +8,6 @@ var marko_template = module.exports = require("marko/src/html").t(__filename),
     marko_escapeXml = helpers_escape_xml.x,
     marko_forOf = require("marko/src/runtime/helpers/for-of"),
     marko_attr = require("marko/src/runtime/html/helpers/attr"),
-    marko_classAttr = require("marko/src/runtime/html/helpers/class-attr"),
     marko_loadTag = require("marko/src/runtime/helpers/load-tag"),
     init_components_tag = marko_loadTag(require("marko/src/core-tags/components/init-components-tag")),
     await_reorderer_tag = marko_loadTag(require("marko/src/core-tags/core/await/reorderer-renderer")),
@@ -25,13 +24,7 @@ function render(input, out, __component, component, state) {
     out.w("Offline");
   }
 
-  out.w("</h1><table id=impressoras class=\"table table-striped table-hover\"><thead class=thead-light><tr><th>ID_WAY</th><th>Total Impresso</th><th>Modelo</th><th>Número de Série</th><th>Ponto</th><th>IP da Máquina</th><th>Ultima Comunicação</th>");
-
-  if (data.offline == "true") {
-    out.w("<th>Alterar Status</th>");
-  }
-
-  out.w("</tr></thead><tbody>");
+  out.w("</h1><table id=impressoras class=\"table table-striped table-hover\"><thead class=thead-light><tr><th>ID_WAY</th><th>Total Impresso</th><th>Número de Série</th></tr></thead><tbody>");
 
   var $for$0 = 0;
 
@@ -39,54 +32,21 @@ function render(input, out, __component, component, state) {
     var $keyScope$0 = "[" + (($for$0++) + "]");
 
     out.w("<tr" +
-      marko_classAttr("status_" + impressora.scan_status) +
-      marko_attr("title", (impressora.scan_status + " - ") + impressora.scan_observation) +
       marko_attr("id", "impressora_" + (impressora.id == null ? "" : impressora.id)) +
       "><td>" +
       marko_escapeXml(impressora.id_way) +
       "</td><td>" +
       marko_escapeXml(impressora.total) +
       "</td><td>" +
-      marko_escapeXml(impressora.model) +
-      "</td><td>" +
       marko_escapeXml(impressora.serialNumber) +
-      "</td><td>" +
-      marko_escapeXml(impressora.installationPoint) +
-      "</td>");
-
-    if (impressora.tipo_conexao == "usb") {
-      out.w("<td>USB</td>");
-    } else if (impressora.tipo_conexao == "network") {
-      out.w("<td>" +
-        marko_escapeXml(impressora.ipAddress) +
-        "</td>");
-    } else {
-      out.w("<td>Unknown</td>");
-    }
-
-    out.w("<td>" +
-      marko_escapeXml(impressora.lastCommunication));
-
-    if (!impressora.lastCommunication) {
-      out.w("nulo");
-    }
-
-    out.w("</td>");
-
-    if (data.offline == "true") {
-      out.w("<td><a class=button-link" +
-        marko_attr("href", "/impressoras/form/" + impressora.id_way) +
-        ">Editar</a></td>");
-    }
-
-    out.w("</tr>");
+      "</td></tr>");
   });
 
   out.w("</tbody></table></div></main>");
 
   init_components_tag({}, out);
 
-  await_reorderer_tag({}, out, __component, "33");
+  await_reorderer_tag({}, out, __component, "20");
 
   _preferred_script_location_tag({}, out);
 
