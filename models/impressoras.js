@@ -101,7 +101,7 @@ class Impressora {
                         }
                     }
                     else if (impressoraTest.status == 'online' && valores.status == 'offline') {
-                        console.log(valores.customer+ ' '+ valores.manufacturer+ ' '+ valores.model +' '+valores.serialNumber + ' ficou offline')
+                        console.log(valores.customer_name+ ' '+ valores.manufacturer+ ' '+ valores.model +' '+valores.serialNumber + ' ficou offline')
                     }
                   //  console.log('...Valores atualizados');
                 }
