@@ -6,7 +6,8 @@ module.exports = {
         noMonitoring: 'Impressora não esta sendo monitorada',
         recentlyLost: 'Novo (em observação)',
         keven: 'Keven',
-        everythingOk: 'Não precisa conferir'
+        everythingOk: 'Não precisa conferir',
+        recentlyOnline: 'Voltou a comunicação recentemente'
 
     },
     scan_status: {
@@ -16,6 +17,7 @@ module.exports = {
         noMonitoring: 'noMonitoring',
         recentlyLost: 'recentlyLost',
         keven: 'keven',
-        everythingOk: 'everythingOk'
+        everythingOk: 'everythingOk',
+        recentlyOnline: 'recentlyOnline'
     }
 }

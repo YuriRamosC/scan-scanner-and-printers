@@ -33,3 +33,7 @@
     border-left-style: solid;
     border-left-color: green !important;
 }
+.status_recentlyOnline {
+    border-left-style: solid;
+    border-left-color: blue;
+}

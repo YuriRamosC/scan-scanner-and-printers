@@ -95,9 +95,9 @@ class Impressora {
 
                 if (resultados.changedRows > 0) {
                     if (impressoraTest.status == 'offline' && valores.status == 'online') {
-                        console.log(impressoraTest.serialNumber + ' ficou online, status limpo');
+                        console.log(valores.customer_name+ ' '+ valores.manufacturer+ ' '+ valores.model +' '+valores.serialNumber + ' ficou online, status limpo');
                         if (impressoraTest.scan_status != 'everythingOk' && impressoraTest.scan_status != null) {
-                            this.altera(id_way, { scan_status: 'null' }, res);
+                            this.altera(id_way, { scan_status: 'recentlyOnline' }, res);
                         }
                     }
                     else if (impressoraTest.status == 'online' && valores.status == 'offline') {
