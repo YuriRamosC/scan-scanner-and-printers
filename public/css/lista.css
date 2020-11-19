@@ -1,39 +1,47 @@
 .status_andre {
     border-left-style: solid;
+    border-left-width: 5px;
     border-left-color: pink !important;
 }
 
 .status_devilPrinter {
     border-left-style: solid;
+    border-left-width: 5px;
     border-left-color: rgb(99, 0, 0) !important;
 }
 
 
 .status_cantCheck {
     border-left-style: solid;
+    border-left-width: 5px;
     border-left-color: red !important;
 }
 
 .status_noMonitoring {
     border-left-style: solid;
+    border-left-width: 5px;
     border-left-color: grey !important;
 }
 
 .status_recentlyLost {
     border-left-style: solid;
+    border-left-width: 5px;
     border-left-color: rgb(187, 43, 98) !important;
 }
 
 .status_keven {
     border-left-style: solid;
+    border-left-width: 5px;
     border-left-color: orange !important;
 }
 
 .status_everythingOk {
     border-left-style: solid;
+    border-left-width: 5px;
     border-left-color: green !important;
 }
 .status_recentlyOnline {
     border-left-style: solid;
+    border-left-width: 5px;
     border-left-color: blue;
 }

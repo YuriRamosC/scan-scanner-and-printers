@@ -85,6 +85,7 @@ class Impressora {
     altera(id_way, valores, res) {
         const sql = 'UPDATE impressoras SET ? WHERE id_way=?';
         var impressoraTest = {};
+        var promises = [];
         this.buscaPorId(id_way, res, function (impressora) {
             impressoraTest = impressora;
         });

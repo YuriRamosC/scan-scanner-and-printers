@@ -4,6 +4,7 @@
   "description": "Initialized",
   "main": "index.js",
   "dependencies": {
+    "alert": "^5.0.6",
     "async": "^3.2.0",
     "axios": "^0.21.0",
     "consign": "^0.1.6",
