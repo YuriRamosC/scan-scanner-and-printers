@@ -19,6 +19,7 @@ nav{
   justify-content: space-between;
   height: 70px;
   padding: 0 100px;
+  width: 100%;
 }
 nav .logo{
   color:  #fff;

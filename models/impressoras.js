@@ -58,7 +58,7 @@ class Impressora {
                         if (impressorasAtualizadas[row].status == 'online' && impressorasAtualizadas[row].scan_status != 'everythingOk' && impressorasAtualizadas[row].scan_status != null) {
                             var previousStatus = impressorasAtualizadas[row].scan_status;
                             impressorasAtualizadas[row].scan_status = '';
-                            console.log(impressorasAtualizadas[row].serialNumber + ' -> Status antigo'+ previousStatus);
+                            console.log(impressorasAtualizadas[row].serialNumber + ' -> Status antigo' + previousStatus);
                         }
                         this.altera(impressorasAtualizadas[row].id_way, impressorasAtualizadas[row], res);
 
@@ -86,7 +86,7 @@ class Impressora {
     }
     altera(id_way, valores, res) {
         const sql = 'UPDATE impressoras SET ? WHERE id_way=?';
-        var impressoraTest = {};
+        var impressoraTest = [];
         this.buscaPorId(id_way, res, function (impressora) {
             impressoraTest = impressora;
         });
@@ -97,14 +97,20 @@ class Impressora {
 
                 if (resultados.changedRows > 0) {
                     if (impressoraTest.status == 'offline' && valores.status == 'online') {
-                        console.log(valores.customer_name+ ' '+ valores.manufacturer+ ' '+ valores.model +' '+valores.serialNumber + ' ficou online, status anterior: ');
+                        console.log(valores.customer_name + ' ' + valores.manufacturer + ' ' + valores.model + ' ' + valores.serialNumber + ' ficou online, status antigo: ' + impressoraTest.scan_status);
                         if (impressoraTest.scan_status != 'everythingOk' && impressoraTest.scan_status != null) {
                             this.altera(id_way, { scan_status: 'recentlyOnline' }, res);
                         }
                     }
-                    else if (impressoraTest.status == 'online' && valores.status == 'offline') {
-                        console.log(valores.customer_name+ ' '+ valores.manufacturer+ ' '+ valores.model +' '+valores.serialNumber + ' ficou offline')
+                    else if (valores.status == 'online' && impressoraTest.scan_status == 'recentlyOnline') {
+                        this.altera(id_way, { scan_status: '' }, res);
                     }
+                    else if (impressoraTest.status == 'online' && valores.status == 'offline') {
+                        console.log(valores.customer_name + ' ' + valores.manufacturer + ' ' + valores.model + ' ' + valores.serialNumber + ' ficou offline')
+                    }
+                }
+                else if (valores.status == 'online' && impressoraTest.scan_status == 'recentlyOnline') {
+                    this.altera(id_way, { scan_status: '' }, res);
                 }
             }
         });

@@ -54,13 +54,13 @@ class Devourer {
                     }
                 }
             });
-            console.log(resultWithSerialNumber);
             return callback(resultWithSerialNumber);
         });
     }
-
+   // 202093629706457
     requestPrintWayy(skip, impressorasAtualizadas, res) {
         let skipString = '';
+        let promises = [];
         if (skip > 0) {
             skipString = '?skip=' + skip;
         }
