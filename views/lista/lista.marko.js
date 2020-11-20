@@ -87,11 +87,11 @@ function render(input, out, __component, component, state) {
     out.w("</tr>");
   });
 
-  out.w("</tbody></table></div></main>");
+  out.w("</tbody></table></div><div><input type=submit value=\"Abrir caixa\" class=\"btn btn-primary\"></div></main>");
 
   init_components_tag({}, out);
 
-  await_reorderer_tag({}, out, __component, "33");
+  await_reorderer_tag({}, out, __component, "35");
 
   _preferred_script_location_tag({}, out);
 

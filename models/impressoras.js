@@ -67,6 +67,7 @@ class Impressora {
                 }
             });
         };
+        //colocar o array de mensagens junto com esse redirect
         return res.redirect('/impressoras');
     };
 
@@ -85,7 +86,6 @@ class Impressora {
     altera(id_way, valores, res) {
         const sql = 'UPDATE impressoras SET ? WHERE id_way=?';
         var impressoraTest = {};
-        var promises = [];
         this.buscaPorId(id_way, res, function (impressora) {
             impressoraTest = impressora;
         });
@@ -96,7 +96,7 @@ class Impressora {
 
                 if (resultados.changedRows > 0) {
                     if (impressoraTest.status == 'offline' && valores.status == 'online') {
-                        console.log(valores.customer_name+ ' '+ valores.manufacturer+ ' '+ valores.model +' '+valores.serialNumber + ' ficou online, status limpo');
+                        console.log(valores.customer_name+ ' '+ valores.manufacturer+ ' '+ valores.model +' '+valores.serialNumber + ' ficou online, status anterior: '+valores.scan_status);
                         if (impressoraTest.scan_status != 'everythingOk' && impressoraTest.scan_status != null) {
                             this.altera(id_way, { scan_status: 'recentlyOnline' }, res);
                         }
@@ -104,7 +104,6 @@ class Impressora {
                     else if (impressoraTest.status == 'online' && valores.status == 'offline') {
                         console.log(valores.customer_name+ ' '+ valores.manufacturer+ ' '+ valores.model +' '+valores.serialNumber + ' ficou offline')
                     }
-                  //  console.log('...Valores atualizados');
                 }
             }
         });

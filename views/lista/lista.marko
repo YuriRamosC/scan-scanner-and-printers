@@ -15,8 +15,7 @@
     <main class="conteudoPrincipal">
       <div class="container">
         <h1>
-          ${data.impressoras.length} 
-          Impressoras
+          ${data.impressoras.length} Impressoras
           <if(data.offline == "true")>Offline</if>
         </h1>
         <table id="impressoras" class="table table-striped table-hover table-responsive-lg">
@@ -52,15 +51,20 @@
               <else>
                 <td>Unknown</td>
               </else>
-              <td>${impressora.lastCommunication}<if(!impressora.lastCommunication)>nulo</if></td>
+              <td>
+                ${impressora.lastCommunication}<if(!impressora.lastCommunication)>nulo</if>
+              </td>
               <if(data.offline == "true")>
                 <td>
-                    <a class="button-link" href=`/impressoras/form/${impressora.id_way}`>Editar</a>
+                  <a class="button-link" href=`/impressoras/form/${impressora.id_way}`>Editar</a>
                 </td>
               </if>
             </tr>
           </tbody>
         </table>
+      </div>
+      <div>
+        <input type="submit" value="Abrir caixa" class="btn btn-primary"/>
       </div>
     </main>
   </body>
