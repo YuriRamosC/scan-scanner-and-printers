@@ -1,10 +1,9 @@
 const Impressora = require('../models/impressoras');
 const Devourer = require('./devourer');
-const listaView = require('../views/lista/lista.marko');
-const formView = require('../views/form/form.marko');
-const countersView = require('../views/counters/counters.marko');
+const listaView = require('../views/printers/lista/lista.marko');
+const formView = require('../views/printers/form/form.marko');
+const countersView = require('../views/printers/counters/counters.marko');
 module.exports = app => {
-
     app.get('/impressoras', (req, res) => {
         Impressora.lista(res, function(impressoras){
             res.marko(listaView, {impressoras:impressoras});

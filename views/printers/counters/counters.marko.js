@@ -2,7 +2,7 @@
 "use strict";
 
 var marko_template = module.exports = require("marko/src/html").t(__filename),
-    marko_componentType = "/scan-scanner-and-printers$1.0.0/views/counters/counters.marko",
+    marko_componentType = "/scan-scanner-and-printers$1.0.0/views/printers/counters/counters.marko",
     marko_renderer = require("marko/src/runtime/components/renderer"),
     helpers_escape_xml = require("marko/src/runtime/html/helpers/escape-xml"),
     marko_escapeXml = helpers_escape_xml.x,
@@ -59,7 +59,7 @@ marko_template._ = marko_renderer(render, {
   });
 
 marko_template.meta = {
-    id: "/scan-scanner-and-printers$1.0.0/views/counters/counters.marko",
+    id: "/scan-scanner-and-printers$1.0.0/views/printers/counters/counters.marko",
     tags: [
       "marko/src/core-tags/components/init-components-tag",
       "marko/src/core-tags/core/await/reorderer-renderer",

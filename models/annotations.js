@@ -7,25 +7,25 @@ const codename = require('../controllers/codename');
 require('marko/node-require').install();
 require('marko/express');
 
-class Impressora {
-    adiciona(impressora, res) {
+class Annotation {
+    adiciona(annotation, res) {
 
-        console.dir(impressora);
-        const sql = 'INSERT INTO impressoras SET ?'
+        console.dir(annotation);
+        const sql = 'INSERT INTO annotations SET ?'
 
-        conexao.query(sql, impressora, (erro, resultados) => {
+        conexao.query(sql, annotation, (erro, resultados) => {
             if (erro.sqlMessage == '23000') {
 
             } else if (erro) {
             }
             else {
-                res.status(201).json(impressora);
+                res.status(201).json(annotation);
             }
         })
 
     }
     lista(res, callback) {
-        const sql = 'SELECT * FROM impressoras'
+        const sql = 'SELECT * FROM annotations'
 
         conexao.query(sql, (erro, resultados) => {
             if (erro) {
@@ -38,7 +38,7 @@ class Impressora {
 
     listaOffline(res, callback) {
         const search = '\'offline\'';
-        const sql = `SELECT * FROM impressoras where status LIKE ${search} ORDER BY scan_status ASC, lastCommunication DESC`
+        const sql = `SELECT * FROM annotations where status LIKE ${search} ORDER BY scan_status ASC, lastCommunication DESC`
 
         conexao.query(sql, (erro, resultados) => {
             if (erro) {
@@ -49,18 +49,18 @@ class Impressora {
         });
     }
 
-    gravarImpressorasBD(impressorasAtualizadas, res) {
-        const sql = 'INSERT INTO impressoras SET ?';
-        for (let row = 0; row < impressorasAtualizadas.length; row++) {
-            conexao.query(sql, impressorasAtualizadas[row], (erro, resultados) => {
+    gravarImpressorasBD(annotationsAtualizadas, res) {
+        const sql = 'INSERT INTO annotations SET ?';
+        for (let row = 0; row < annotationsAtualizadas.length; row++) {
+            conexao.query(sql, annotationsAtualizadas[row], (erro, resultados) => {
                 if (erro) {
                     if (erro.code === 'ER_DUP_ENTRY') {
-                        if (impressorasAtualizadas[row].status == 'online' && impressorasAtualizadas[row].scan_status != 'everythingOk' && impressorasAtualizadas[row].scan_status != null) {
-                            var previousStatus = impressorasAtualizadas[row].scan_status;
-                            impressorasAtualizadas[row].scan_status = '';
-                            console.log(impressorasAtualizadas[row].serialNumber + ' -> Status antigo'+ previousStatus);
+                        if (annotationsAtualizadas[row].status == 'online' && annotationsAtualizadas[row].scan_status != 'everythingOk' && annotationsAtualizadas[row].scan_status != null) {
+                            var previousStatus = annotationsAtualizadas[row].scan_status;
+                            annotationsAtualizadas[row].scan_status = '';
+                            console.log(annotationsAtualizadas[row].serialNumber + ' -> Status antigo'+ previousStatus);
                         }
-                        this.altera(impressorasAtualizadas[row].id_way, impressorasAtualizadas[row], res);
+                        this.altera(annotationsAtualizadas[row].id_way, annotationsAtualizadas[row], res);
 
                     } else {
                         res.status(400).json(erro);
@@ -69,26 +69,26 @@ class Impressora {
             });
         };
         //colocar o array de mensagens junto com esse redirect
-        return res.redirect('/impressoras');
+        return res.redirect('/annotations');
     };
 
 
     buscaPorId(id, res, callback) {
-        const sql = `SELECT * FROM impressoras WHERE id_way LIKE \'${id}\'`;
+        const sql = `SELECT * FROM annotations WHERE id_way LIKE \'${id}\'`;
         conexao.query(sql, (erro, resultados) => {
-            const impressora = resultados[0];
+            const annotation = resultados[0];
             if (erro) {
                 res.status(400).json(erro);
             } else {
-                callback(impressora);
+                callback(annotation);
             }
         })
     }
     altera(id_way, valores, res) {
-        const sql = 'UPDATE impressoras SET ? WHERE id_way=?';
-        var impressoraTest = {};
-        this.buscaPorId(id_way, res, function (impressora) {
-            impressoraTest = impressora;
+        const sql = 'UPDATE annotations SET ? WHERE id_way=?';
+        var annotationTest = {};
+        this.buscaPorId(id_way, res, function (annotation) {
+            annotationTest = annotation;
         });
         conexao.query(sql, [valores, id_way], (erro, resultados) => {
             if (erro) {
@@ -96,13 +96,13 @@ class Impressora {
             } else {
 
                 if (resultados.changedRows > 0) {
-                    if (impressoraTest.status == 'offline' && valores.status == 'online') {
+                    if (annotationTest.status == 'offline' && valores.status == 'online') {
                         console.log(valores.customer_name+ ' '+ valores.manufacturer+ ' '+ valores.model +' '+valores.serialNumber + ' ficou online, status anterior: ');
-                        if (impressoraTest.scan_status != 'everythingOk' && impressoraTest.scan_status != null) {
+                        if (annotationTest.scan_status != 'everythingOk' && annotationTest.scan_status != null) {
                             this.altera(id_way, { scan_status: 'recentlyOnline' }, res);
                         }
                     }
-                    else if (impressoraTest.status == 'online' && valores.status == 'offline') {
+                    else if (annotationTest.status == 'online' && valores.status == 'offline') {
                         console.log(valores.customer_name+ ' '+ valores.manufacturer+ ' '+ valores.model +' '+valores.serialNumber + ' ficou offline')
                     }
                 }
@@ -111,7 +111,7 @@ class Impressora {
     }
 
     deleta(id, res) {
-        const sql = 'DELETE FROM impressoras WHERE id=?'
+        const sql = 'DELETE FROM annotations WHERE id=?'
 
         conexao.query(sql, id, (erro, resultados) => {
             if (erro) {
@@ -123,4 +123,4 @@ class Impressora {
     }
 }
 
-module.exports = new Impressora
+module.exports = new Annotation
