@@ -25,13 +25,7 @@ function render(input, out, __component, component, state) {
     out.w("Offline");
   }
 
-  out.w("</h1><table id=impressoras class=\"table table-striped table-hover table-responsive-lg\"><thead class=thead-light><tr><th>Empresa</th><th>Fabricante</th><th>Modelo</th><th>Número de Série</th><th>Ponto</th><th>IP da Máquina</th><th>Ultima Comunicação</th>");
-
-  if (data.offline == "true") {
-    out.w("<th>Alterar Status</th>");
-  }
-
-  out.w("</tr></thead><tbody>");
+  out.w("</h1><table id=impressoras class=\"table table-striped table-hover table-responsive-lg\"><thead class=thead-light><tr><th>Empresa</th><th>Fabricante</th><th>Modelo</th><th>Número de Série</th><th>Ponto</th><th>IP da Máquina</th><th>Ultima Comunicação</th><th>Alterar Status</th></tr></thead><tbody>");
 
   var $for$0 = 0;
 
@@ -76,22 +70,16 @@ function render(input, out, __component, component, state) {
       out.w("nulo");
     }
 
-    out.w("</td>");
-
-    if (data.offline == "true") {
-      out.w("<td><a class=button-link" +
-        marko_attr("href", "/impressoras/form/" + impressora.id_way) +
-        ">Editar</a></td>");
-    }
-
-    out.w("</tr>");
+    out.w("</td><td><a class=button-link" +
+      marko_attr("href", "/impressoras/form/" + impressora.id_way) +
+      ">Editar</a></td></tr>");
   });
 
-  out.w("</tbody></table></div><div><input type=submit value=\"Abrir caixa\" class=\"btn btn-primary\"></div></main>");
+  out.w("</tbody></table></div></main>");
 
   init_components_tag({}, out);
 
-  await_reorderer_tag({}, out, __component, "35");
+  await_reorderer_tag({}, out, __component, "33");
 
   _preferred_script_location_tag({}, out);
 

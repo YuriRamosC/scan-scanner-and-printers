@@ -28,9 +28,7 @@
               <th>Ponto</th>
               <th>IP da Máquina</th>
               <th>Ultima Comunicação</th>
-              <if(data.offline == "true")>
                 <th>Alterar Status</th>
-              </if>
             </tr>
           </thead>
           <tbody>
@@ -54,17 +52,12 @@
               <td>
                 ${impressora.lastCommunication}<if(!impressora.lastCommunication)>nulo</if>
               </td>
-              <if(data.offline == "true")>
                 <td>
                   <a class="button-link" href=`/impressoras/form/${impressora.id_way}`>Editar</a>
                 </td>
-              </if>
             </tr>
           </tbody>
         </table>
-      </div>
-      <div>
-        <input type="submit" value="Abrir caixa" class="btn btn-primary"/>
       </div>
     </main>
   </body>
