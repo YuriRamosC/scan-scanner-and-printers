@@ -43,5 +43,5 @@
 .status_recentlyOnline {
     border-left-style: solid;
     border-left-width: 5px;
-    border-left-color: blue;
+    border-left-color: blue !important;
 }
