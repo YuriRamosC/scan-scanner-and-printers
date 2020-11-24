@@ -1,5 +1,4 @@
 const Impressora = require('../models/impressoras');
-const Anotacoes = require('../models/annotations');
 const Devourer = require('./devourer');
 const listaView = require('../views/printers/lista/lista.marko');
 const formView = require('../views/printers/form/form.marko');

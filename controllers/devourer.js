@@ -1,4 +1,3 @@
-const fs = require('fs');
 const moment = require('moment');
 const request = require('request');
 const axios = require('axios');
@@ -6,8 +5,6 @@ const Impressora = require('../models/impressoras');
 const hostname = 'https://api.printwayy.com';
 const printers_path = '/devices/v1/printers';
 const urlBase = `${hostname}${printers_path}`;
-const codename = require('./codename');
-const { resolve } = require('path');
 const headers = {
     'printwayy-key': '5542C0E2-6C0F-43F1-B576-5056CED690B1'
 };

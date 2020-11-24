@@ -1,10 +1,4 @@
 const conexao = require('../infra/conexao');
-const fs = require('fs');
-const Devourer = require('../controllers/devourer');
-const { waitForDebugger } = require('inspector');
-const { resolve } = require('path');
-const codename = require('../controllers/codename');
-const { error } = require('console');
 require('marko/node-require').install();
 require('marko/express');
 

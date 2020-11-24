@@ -1,9 +1,4 @@
 const conexao = require('../infra/conexao');
-const fs = require('fs');
-const Devourer = require('../controllers/devourer');
-const { waitForDebugger } = require('inspector');
-const { resolve } = require('path');
-const codename = require('../controllers/codename');
 require('marko/node-require').install();
 require('marko/express');
 
@@ -68,7 +63,6 @@ class Impressora {
                 }
             });
         };
-        //colocar o array de mensagens junto com esse redirect
         return res.redirect('/impressoras');
     };
 
