@@ -3,14 +3,14 @@ class Tabelas {
         this.conexao = conexao;
         this.criarImpressoras();
         this.criarAnotacoes();
-        this.inserirAnotacoes('andre', 'pink', 0);
-        this.inserirAnotacoes('devilPrinter','border-left-color: rgb(99, 0, 0)', 0);
-        this.inserirAnotacoes('cantCheck', 'red', 0);
-        this.inserirAnotacoes('noMonitoring', 'grey', 0);
-        this.inserirAnotacoes('recentlyLost', 'border-left-color: rgb(187, 43, 98)', 0);
-        this.inserirAnotacoes('keven', 'orange', 0);
-        this.inserirAnotacoes('everythingOk','green', 0);
-        this.inserirAnotacoes('recentlyOnline', 'blue', 0);
+        this.inserirAnotacoes('andre', '#ffc0cb', 0);
+        this.inserirAnotacoes('devilPrinter','#000000', 0);
+        this.inserirAnotacoes('cantCheck', '#ff0000', 0);
+        this.inserirAnotacoes('noMonitoring', '#6c757d', 0);
+        this.inserirAnotacoes('recentlyLost', '#6f42c1', 0);
+        this.inserirAnotacoes('keven', '#fd7e14', 0);
+        this.inserirAnotacoes('everythingOk','#28a745', 0);
+        this.inserirAnotacoes('recentlyOnline', '#007bff', 0);
     }
     criarAnotacoes() {
         const sql = `

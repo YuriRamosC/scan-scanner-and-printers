@@ -1,0 +1,33 @@
+<html>
+  <head>
+    <meta charset="utf-8"/>
+  </head>
+  <body>
+    <header class="cabecalhoPrincipal">
+      <include-html("../../menu.html")/>
+      <link rel="stylesheet" type="text/css" href="/estatico/css/lista.css"/>
+    </header>
+    <main class="conteudoPrincipal">
+      <div class="container">
+        <table id="anotacaos" class="table table-striped table-hover table-responsive-lg">
+          <thead class="thead-light">
+            <tr>
+              <th>Nome da Anotação</th>
+              <th>Nível de Prioridade</th>
+              <th>Editar</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr id="anotacao_${anotacao.id}" for(anotacao in data.annotations)>
+              <td style=`background-color: ${anotacao.color};`>${anotacao.name}</td>
+              <td>${anotacao.priorityLevel}</td>
+              <td>
+                <a class="button-link" href=`/annotations/form/${anotacao.id}`>Editar</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+  </body>
+</html>

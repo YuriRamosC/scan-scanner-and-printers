@@ -1,0 +1,33 @@
+<html>
+  <head/>
+  <body>
+    <header class="cabecalhoPrincipal">
+      <include-html("../../menu.html")/>
+    </header>
+    <main class="conteudoPrincipal">
+      <div class="container">
+        <if(data.annotation.id)>
+          <h2>Alterar Anotação ${data.annotation.name}</h2>
+        </if>
+        <else>
+          <h2>Adicionar Anotação</h2>
+        </else>
+        <form action="/annotations" method="post">
+          <div if(data.annotation.id)>
+            <input type="hidden" name="_method" value="PUT"/>
+            <input type="hidden" name="id" value="${data.annotation.id}"/>
+          </div>
+            <div class="form-group col">
+                <label for="name">Nome da anotação:</label>
+                <input  class="form-control"  type='text' name="name" id="name" value="${data.annotation.name}"/>
+            </div>
+            <div class="form-group col">
+                <label for="name">Cor:</label>
+                <input  class="form-control"  type='color' name="color" id="color" value="${data.annotation.color}"/>
+            </div>
+          <input type="submit" value="Salvar" class="btn btn-primary"/>
+        </form>
+      </div>
+    </main>
+  </body>
+</html>
