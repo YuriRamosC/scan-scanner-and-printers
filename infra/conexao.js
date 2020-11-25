@@ -9,3 +9,8 @@ const conexao = mysql.createConnection({
 })  
 
 module.exports = conexao;
+
+/*
+    Para que os valores do ID(auto incrementável) do seu banco de dados não fiquem absurdamente gigantes,
+    é recomendado que utilize o comando: innodb-autoinc-lock-mode=0, nas configurações do seu banco de dados.
+*/

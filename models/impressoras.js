@@ -53,7 +53,7 @@ class Impressora {
                         if (impressorasAtualizadas[row].status == 'online' && impressorasAtualizadas[row].scan_status != 'everythingOk' && impressorasAtualizadas[row].scan_status != null) {
                             var previousStatus = impressorasAtualizadas[row].scan_status;
                             impressorasAtualizadas[row].scan_status = '';
-                            console.log(impressorasAtualizadas[row].serialNumber + ' -> Status antigo' + previousStatus);
+                            console.log(impressorasAtualizadas[row].serialNumber + ' -> Status antigo ' + previousStatus);
                         }
                         this.altera(impressorasAtualizadas[row].id_way, impressorasAtualizadas[row], res);
 
