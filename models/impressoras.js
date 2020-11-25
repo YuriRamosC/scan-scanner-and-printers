@@ -44,18 +44,18 @@ class Impressora {
         });
     }
 
-    gravarImpressorasBD(impressorasAtualizadas, res) {
+    gravarImpressorasBD(printers, res) {
         const sql = 'INSERT INTO impressoras SET ?';
-        for (let row = 0; row < impressorasAtualizadas.length; row++) {
-            conexao.query(sql, impressorasAtualizadas[row], (erro, resultados) => {
+        for (let row = 0; row < printers.length; row++) {
+            conexao.query(sql, printers[row], (erro, resultados) => {
                 if (erro) {
                     if (erro.code === 'ER_DUP_ENTRY') {
-                        if (impressorasAtualizadas[row].status == 'online' && impressorasAtualizadas[row].scan_status != 'everythingOk' && impressorasAtualizadas[row].scan_status != null) {
-                            var previousStatus = impressorasAtualizadas[row].scan_status;
-                            impressorasAtualizadas[row].scan_status = '';
-                            console.log(impressorasAtualizadas[row].serialNumber + ' -> Status antigo ' + previousStatus);
+                        if (printers[row].status == 'online' && printers[row].scan_status != 'everythingOk' && printers[row].scan_status != null) {
+                            var previousStatus = printers[row].scan_status;
+                            printers[row].scan_status = '';
+                            console.log(printers[row].serialNumber + ' -> Status antigo ' + previousStatus);
                         }
-                        this.altera(impressorasAtualizadas[row].id_way, impressorasAtualizadas[row], res);
+                        this.altera(printers[row].id_way, printers[row], res);
 
                     } else {
                         res.status(400).json(erro);
