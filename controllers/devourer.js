@@ -5,6 +5,7 @@ const Impressora = require('../models/impressoras');
 const hostname = 'https://api.printwayy.com';
 const printers_path = '/devices/v1/printers';
 const urlBase = `${hostname}${printers_path}`;
+const log = require('./log');
 const headers = {
     'printwayy-key': '5542C0E2-6C0F-43F1-B576-5056CED690B1'
 };
@@ -109,7 +110,7 @@ class Devourer {
 
     tratarDados(impressorasAtualizadas, res) {
         return new Promise((resolve, reject) => {
-            console.log('Atualização iniciada...');
+            log.gravarComData('Atualização iniciada ...');
             this.requestPrintWayy(0, impressorasAtualizadas, res);
             resolve();
         });

@@ -1,11 +1,11 @@
 const conexao = require('../infra/conexao');
 require('marko/node-require').install();
 require('marko/express');
+const log = require('../controllers/log');
 
 class Impressora {
     adiciona(impressora, res) {
 
-        console.dir(impressora);
         const sql = 'INSERT INTO impressoras SET ?'
 
         conexao.query(sql, impressora, (erro, resultados) => {
@@ -53,7 +53,7 @@ class Impressora {
                         if (printers[row].status == 'online' && printers[row].scan_status != 'everythingOk' && printers[row].scan_status != null) {
                             var previousStatus = printers[row].scan_status;
                             printers[row].scan_status = '';
-                            console.log(printers[row].serialNumber + ' -> Status antigo ' + previousStatus);
+                            log.gravarComData(printers[row].serialNumber + ' -> Status antigo ' + previousStatus);
                         }
                         this.altera(printers[row].id_way, printers[row], res);
 
@@ -91,7 +91,7 @@ class Impressora {
 
                 if (resultados.changedRows > 0) {
                     if (impressoraTest.status == 'offline' && valores.status == 'online') {
-                        console.log(valores.customer_name + ' ' + valores.manufacturer + ' ' + valores.model + ' ' + valores.serialNumber + ' ficou online, status antigo: ' + impressoraTest.scan_status);
+                        log.gravarComData(valores.customer_name + ' ' + valores.manufacturer + ' ' + valores.model + ' ' + valores.serialNumber + ' ficou online, status antigo: ' + impressoraTest.scan_status);
                         if (impressoraTest.scan_status != 'everythingOk' && impressoraTest.scan_status != null) {
                             this.altera(id_way, { scan_status: 'recentlyOnline' }, res);
                         }
@@ -100,7 +100,7 @@ class Impressora {
                         this.altera(id_way, { scan_status: '' }, res);
                     }
                     else if (impressoraTest.status == 'online' && valores.status == 'offline') {
-                        console.log(valores.customer_name + ' ' + valores.manufacturer + ' ' + valores.model + ' ' + valores.serialNumber + ' ficou offline')
+                        log.gravarComData(valores.customer_name + ' ' + valores.manufacturer + ' ' + valores.model + ' ' + valores.serialNumber + ' ficou offline');
                     }
                 }
                 else if (valores.status == 'online' && impressoraTest.scan_status == 'recentlyOnline') {
