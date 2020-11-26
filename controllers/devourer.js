@@ -103,6 +103,7 @@ class Devourer {
             } else if (skip == 100) {
                 this.requestPrintWayy(200, impressorasAtualizadas, res);
             } else if (skip == 200) {
+                log.gravarComData('... Atualização finalizada');
                 Impressora.gravarImpressorasBD(impressorasAtualizadas, res);
             }
         });
