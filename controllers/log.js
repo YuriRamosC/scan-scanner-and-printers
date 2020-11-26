@@ -15,7 +15,7 @@ class Log {
     }
 
     gravarComData(message) {
-        var date = moment().format('YYYY-MM-DD HH:MM:SS');
+        var date = moment().format('YYYY-MM-DD HH:mm:SS');
         fs.appendFile(logPath, '\n'+date+' - '+message, function(erro) {
             if(erro) {
                 console.log('Erro ao gravar o Log');
