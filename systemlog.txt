@@ -34,3 +34,41 @@
 2020-11-26 17:37:50 - ... Atualização finalizada
 2020-11-26 17:57:05 - Atualização iniciada ...
 2020-11-26 17:57:06 - ... Atualização finalizada
+2020-11-27 08:18:01 - Atualização iniciada ...
+2020-11-27 08:18:09 - ... Atualização finalizada
+2020-11-27 08:18:29 - CAMORIM Brother DCP-8157DN U63264D5N143203 ficou offline
+2020-11-27 08:18:33 - ATLANTA AGENCIA RICOH SP 3710SF 5178Z810810 ficou offline
+2020-11-27 08:18:36 - MC CONSULTORIA EPSON WF-C5710 X3B2001067 ficou offline
+2020-11-27 09:14:30 - Atualização iniciada ...
+2020-11-27 09:14:32 - ... Atualização finalizada
+2020-11-27 09:14:49 - GLOBAL SAUDE GUARATUBA Samsung SL-M4020ND ZDEJB07KA24BN3A ficou offline
+2020-11-27 09:14:50 - AGBM Samsung SL-M4070FR ZDDPB07KA146PBY ficou online, status antigo: null
+2020-11-27 11:41:19 - Atualização iniciada ...
+2020-11-27 11:41:26 - ... Atualização finalizada
+2020-11-27 11:41:43 - GLOBAL SAUDE GUARATUBA Samsung SL-M4020ND ZDEJB07KA24BN3A ficou online, status antigo: null
+2020-11-27 11:41:43 - GLOBAL SAUDE Samsung SL-M4020ND ZDEJB07M3456CDH ficou offline
+2020-11-27 11:41:44 - ATLANTA AGENCIA RICOH SP 3710SF 5178Z810810 ficou online, status antigo: null
+2020-11-27 14:25:37 - Atualização iniciada ...
+2020-11-27 14:25:40 - ... Atualização finalizada
+2020-11-27 14:25:58 - APP PARANAGUÁ Samsung SL-M4070FR ZDDPB07K412A7ZY ficou online, status antigo: recentlyLost
+2020-11-27 14:25:58 - CONFIDENCE Samsung SL-M4070FR ZDDPB07K813VE7Y ficou offline
+2020-11-27 14:25:59 - RENAN GONÇALVES. Samsung SL-M4070FR ZDDPB07M2152DQF ficou offline
+2020-11-27 14:25:59 - RENAN GONÇALVES. Samsung SL-M3375FD ZER0B07M3158BAX ficou offline
+2020-11-27 14:25:59 - GLOBAL SAUDE Samsung SL-M4020ND ZDEJB07M3456E5T ficou online, status antigo: recentlyLost
+2020-11-27 14:25:59 - GLOBAL SAUDE Samsung SL-M4070FR ZDDPB07M816MWWM ficou online, status antigo: recentlyLost
+2020-11-27 14:25:59 - GLOBAL SAUDE Samsung SL-M4020ND ZDEJB07M3456CDH ficou online, status antigo: null
+2020-11-27 16:06:20 - Atualização iniciada ...
+2020-11-27 16:06:26 - ... Atualização finalizada
+2020-11-27 16:06:42 - ESCOLA ARCO IRIS RICOH SP 377SFNwX Y938Z411625 ficou online, status antigo: recentlyLost
+2020-11-27 16:06:43 - RENAN GONÇALVES. Samsung SL-M4070FR ZDDPB07M2152DQF ficou online, status antigo: null
+2020-11-27 16:06:43 - RENAN GONÇALVES. Samsung SL-M3375FD ZER0B07M3158BAX ficou online, status antigo: null
+2020-11-27 16:26:53 - Atualização iniciada ...
+2020-11-27 16:27:06 - ... Atualização finalizada
+2020-11-27 16:52:01 - Atualização iniciada ...
+2020-11-27 16:52:05 - ... Atualização finalizada
+2020-11-27 16:52:23 - SANTUARIO DO ROCIO EPSON WF-3720 X2TF415910 ficou online, status antigo: everythingOk
+2020-11-27 16:56:52 - Atualização iniciada ...
+2020-11-27 16:56:53 - ... Atualização finalizada
+2020-11-27 16:57:10 - PROTHGEUS Samsung SL-M4070FR ZDDPB07KA146PGY ficou offline
+2020-11-27 17:17:57 - Atualização iniciada ...
+2020-11-27 17:20:06 - Atualização iniciada ...

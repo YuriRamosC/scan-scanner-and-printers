@@ -63,6 +63,7 @@ class Impressora {
                 }
             });
         };
+        log.gravarComData('... Atualização finalizada');
         return res.redirect('/impressoras');
     };
 
