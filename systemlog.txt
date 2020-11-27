@@ -72,3 +72,9 @@
 2020-11-27 16:57:10 - PROTHGEUS Samsung SL-M4070FR ZDDPB07KA146PGY ficou offline
 2020-11-27 17:17:57 - Atualização iniciada ...
 2020-11-27 17:20:06 - Atualização iniciada ...
+2020-11-27 17:21:07 - Atualização iniciada ...
+2020-11-27 17:21:08 - ... Atualização finalizada
+2020-11-27 17:21:25 - DR SIBELE Samsung SL-M4070FR ZDBDBJEJ80015EE ficou offline
+2020-11-27 17:21:25 - ELOCREDI Samsung SL-M4070FR ZDDPB07KA146PQY ficou offline
+2020-11-27 17:21:25 - PROTHGEUS Samsung SL-M4070FR ZDDPB07KA146PGY ficou online, status antigo: null
+2020-11-27 17:21:26 - GLOBAL SAUDE GUARATUBA Samsung SL-M3375FD ZER0B07M315AAQP ficou offline
