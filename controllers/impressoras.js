@@ -28,7 +28,7 @@ module.exports = app => {
 
     app.get('/api-impressoras-offline', (req, res) => {
         Impressora.listaOffline(res, function (impressoras) {
-            res.status(200).json({ impressoras: impressoras});
+            res.status(200).json({ impressoras: impressoras, offline: 'true'});
         });
     });
     //finaliza a edição

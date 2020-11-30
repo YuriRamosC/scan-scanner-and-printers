@@ -63,7 +63,6 @@ class Impressora {
                 }
             });
         };
-        log.gravarComData('... Atualização finalizada');
         return res.redirect('/impressoras');
     };
 
@@ -92,7 +91,7 @@ class Impressora {
 
                 if (resultados.changedRows > 0) {
                     if (impressoraTest.status == 'offline' && valores.status == 'online') {
-                        log.gravarComData(valores.customer_name + ' ' + valores.manufacturer + ' ' + valores.model + ' ' + valores.serialNumber + ' ficou online, status antigo: ' + impressoraTest.scan_status);
+                        log.gravarComData('[ONLINE]['+impressoraTest.scan_status+']'+valores.customer_name + ' ' + valores.manufacturer + ' ' + valores.model + ' ' + valores.serialNumber);
                         if (impressoraTest.scan_status != 'everythingOk' && impressoraTest.scan_status != null) {
                             this.altera(id_way, { scan_status: 'recentlyOnline' }, res);
                         }
