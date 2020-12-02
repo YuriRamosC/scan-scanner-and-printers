@@ -11,6 +11,7 @@ const headers = {
 };
 const contadores =
     [
+    ['92f93d14-cd80-4cc5-832c-6919817e0f56','X2TF374991'],
     ['1953dbda-8cd7-44c2-a937-0f0c393b0790', 'X3B2001133'],
     ['52a10dda-9d67-41a2-b83e-68c16c59a702', 'X3B2001773'],
     ['603cd395-52f5-4819-a412-8248390d079f', 'X3B2002252'],
@@ -38,6 +39,9 @@ class Devourer {
                     id_way = response.config.url.replace('https://api.printwayy.com/devices/v1/printers/', '');
                     id_way = id_way.replace('/counters', '');
                     return { id_way: id_way, total: response.data[0].totalCount + response.data[1].totalCount };
+                })
+                .catch(function(response){
+                    return{ id_way: '0', total: 0};
                 }));
         }
 
