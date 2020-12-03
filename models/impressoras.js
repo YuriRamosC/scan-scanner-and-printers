@@ -65,7 +65,31 @@ class Impressora {
         };
         return res.redirect('/impressoras');
     };
-
+    newGravarImpressorasBD(printers, res) {
+        const sql = 'INSERT INTO impressoras SET ?';
+        var promises = [];
+        var resultsJson =[];
+        for (let row = 0; row < printers.length; row++) {
+            promises.push(conexao.query(sql, printers[row], (erro, resultados) => {
+                if (erro) {
+                    if (erro.code === 'ER_DUP_ENTRY') {
+                        if (printers[row].status == 'online' && printers[row].scan_status != 'everythingOk' && printers[row].scan_status != null) {
+                            var previousStatus = printers[row].scan_status;
+                            printers[row].scan_status = '';
+                            log.gravarComData('[ONLINE] '+printers[row].serialNumber + ' -> Status antigo ' + previousStatus);
+                        }
+                        this.altera(printers[row].id_way, printers[row], res);
+                    } else {
+                        res.status(400).json(erro);
+                    }
+                }
+            }));
+        };
+        //(JSON.stringify(resultsJson))
+        Promise.all(promises).then(result=>{
+            return res.redirect('/impressoras');
+        });
+    };
 
     buscaPorId(id, res, callback) {
         const sql = `SELECT * FROM impressoras WHERE id_way LIKE \'${id}\'`;
