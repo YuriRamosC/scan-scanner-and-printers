@@ -87,7 +87,7 @@ class Impressora {
         };
         //(JSON.stringify(resultsJson))
         Promise.all(promises).then(result=>{
-            return res.redirect('/impressoras');
+            return res.redirect('/api-impressoras');
         });
     };
 

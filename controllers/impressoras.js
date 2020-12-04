@@ -53,6 +53,7 @@ module.exports = app => {
     });
 
     app.get('/impressoras-printwayy', (req, res) => {
+        console.log('chamou')
         var impressorasAtualizadas = [];
         Devourer.tratarDados(impressorasAtualizadas, res);
     });
