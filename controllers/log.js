@@ -1,8 +1,10 @@
 const fs = require('fs');
 const logPath = './systemlog.txt';
 const moment = require('moment');
+
+const arrayUpdate = [];
+//Esse array guarda os "gravarComData" de uma Atualização e no final vai ser enviado para a aplicação Cliente
 class Log {
-    
     gravar(message) {
         fs.writeFile(logPath, '\n'+message, function(erro) {
             if(erro) {
