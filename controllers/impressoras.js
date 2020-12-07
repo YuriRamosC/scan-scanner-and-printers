@@ -14,7 +14,6 @@ module.exports = app => {
         //   });
     })
     app.get('/api-impressoras', (req, res) => {
-        console.log('a chamada a api foi solicitada');
         Impressora.lista(res, function (impressoras) {
             res.status(200).json({impressoras: impressoras});
         });
