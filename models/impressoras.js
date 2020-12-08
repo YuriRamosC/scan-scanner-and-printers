@@ -133,7 +133,38 @@ class Impressora {
             }
         });
     }
+    alteraApi(id_way, valores, res, callback) {
+        const sql = 'UPDATE impressoras SET ? WHERE id_way=?';
+        var impressoraTest = [];
+        this.buscaPorId(id_way, res, function (impressora) {
+            impressoraTest = impressora;
+        });
+        conexao.query(sql, [valores, id_way], (erro, resultados) => {
+            if (erro) {
+                res.status(400).json(erro)
+            } else {
 
+                if (resultados.changedRows > 0) {
+                    if (impressoraTest.status == 'offline' && valores.status == 'online') {
+                        log.gravarComData('[ONLINE]['+impressoraTest.scan_status+']'+valores.customer_name + ' ' + valores.manufacturer + ' ' + valores.model + ' ' + valores.serialNumber);
+                        if (impressoraTest.scan_status != 'everythingOk' && impressoraTest.scan_status != null) {
+                            this.altera(id_way, { scan_status: 'recentlyOnline' }, res);
+                        }
+                    }
+                    else if (valores.status == 'online' && impressoraTest.scan_status == 'recentlyOnline') {
+                        this.altera(id_way, { scan_status: '' }, res);
+                    }
+                    else if (impressoraTest.status == 'online' && valores.status == 'offline') {
+                        log.gravarComData('[OFFLINE] '+ valores.customer_name + ' ' + valores.manufacturer + ' ' + valores.model + ' ' + valores.serialNumber);
+                    }
+                }
+                else if (valores.status == 'online' && impressoraTest.scan_status == 'recentlyOnline') {
+                    this.altera(id_way, { scan_status: '' }, res);
+                }
+            }
+        callback(resultados);
+        });
+    }
     deleta(id, res) {
         const sql = 'DELETE FROM impressoras WHERE id=?'
 
