@@ -30,6 +30,12 @@ module.exports = app => {
             res.status(200).json({ impressoras: impressoras, offline: 'true'});
         });
     });
+    app.post('/api-impressoras-offline', (req, res) => {
+        const valores = { scan_status: req.body.scan_status, scan_observation: req.body.scan_observation }
+        Impressora.altera(req.body.id_way, valores, res)
+        .then(res.status(200));
+    });
+
     //finaliza a edição
     app.post('/impressoras-offline', (req, res) => {
         const valores = { scan_status: req.body.scan_status, scan_observation: req.body.scan_observation }
