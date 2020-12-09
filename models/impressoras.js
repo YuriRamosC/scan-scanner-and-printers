@@ -53,7 +53,7 @@ class Impressora {
                         if (printers[row].status == 'online' && printers[row].scan_status != 'everythingOk' && printers[row].scan_status != null) {
                             var previousStatus = printers[row].scan_status;
                             printers[row].scan_status = '';
-                            log.gravarComData('[ONLINE] '+printers[row].serialNumber + ' -> Status antigo ' + previousStatus);
+                            log.gravarComData('[ONLINE] ' + printers[row].serialNumber + ' -> Status antigo ' + previousStatus);
                         }
                         this.altera(printers[row].id_way, printers[row], res);
 
@@ -68,15 +68,17 @@ class Impressora {
     newGravarImpressorasBD(printers, res) {
         const sql = 'INSERT INTO impressoras SET ?';
         var promises = [];
-        var resultsJson =[];
+        var resultsJson = [];
         for (let row = 0; row < printers.length; row++) {
             promises.push(conexao.query(sql, printers[row], (erro, resultados) => {
                 if (erro) {
                     if (erro.code === 'ER_DUP_ENTRY') {
                         if (printers[row].status == 'online' && printers[row].scan_status != 'everythingOk' && printers[row].scan_status != null) {
                             var previousStatus = printers[row].scan_status;
-                            printers[row].scan_status = '';
-                            log.gravarComData('[ONLINE] '+printers[row].serialNumber + ' -> Status antigo ' + previousStatus);
+                            if (printers[row].scan_status != 'cantCheck') {
+                                printers[row].scan_status = '';
+                            }
+                            log.gravarComData('[ONLINE] ' + printers[row].serialNumber + ' -> Status antigo ' + previousStatus);
                         }
                         this.altera(printers[row].id_way, printers[row], res);
                     } else {
@@ -86,7 +88,7 @@ class Impressora {
             }));
         };
         //(JSON.stringify(resultsJson))
-        Promise.all(promises).then(result=>{
+        Promise.all(promises).then(result => {
             return res.redirect('/api-impressoras');
         });
     };
@@ -115,7 +117,7 @@ class Impressora {
 
                 if (resultados.changedRows > 0) {
                     if (impressoraTest.status == 'offline' && valores.status == 'online') {
-                        log.gravarComData('[ONLINE]['+impressoraTest.scan_status+']'+valores.customer_name + ' ' + valores.manufacturer + ' ' + valores.model + ' ' + valores.serialNumber);
+                        log.gravarComData('[ONLINE][' + impressoraTest.scan_status + ']' + valores.customer_name + ' ' + valores.manufacturer + ' ' + valores.model + ' ' + valores.serialNumber);
                         if (impressoraTest.scan_status != 'everythingOk' && impressoraTest.scan_status != null) {
                             this.altera(id_way, { scan_status: 'recentlyOnline' }, res);
                         }
@@ -124,7 +126,7 @@ class Impressora {
                         this.altera(id_way, { scan_status: '' }, res);
                     }
                     else if (impressoraTest.status == 'online' && valores.status == 'offline') {
-                        log.gravarComData('[OFFLINE] '+ valores.customer_name + ' ' + valores.manufacturer + ' ' + valores.model + ' ' + valores.serialNumber);
+                        log.gravarComData('[OFFLINE] ' + valores.customer_name + ' ' + valores.manufacturer + ' ' + valores.model + ' ' + valores.serialNumber);
                     }
                 }
                 else if (valores.status == 'online' && impressoraTest.scan_status == 'recentlyOnline') {
@@ -146,7 +148,7 @@ class Impressora {
 
                 if (resultados.changedRows > 0) {
                     if (impressoraTest.status == 'offline' && valores.status == 'online') {
-                        log.gravarComData('[ONLINE]['+impressoraTest.scan_status+']'+valores.customer_name + ' ' + valores.manufacturer + ' ' + valores.model + ' ' + valores.serialNumber);
+                        log.gravarComData('[ONLINE][' + impressoraTest.scan_status + ']' + valores.customer_name + ' ' + valores.manufacturer + ' ' + valores.model + ' ' + valores.serialNumber);
                         if (impressoraTest.scan_status != 'everythingOk' && impressoraTest.scan_status != null) {
                             this.altera(id_way, { scan_status: 'recentlyOnline' }, res);
                         }
@@ -155,14 +157,14 @@ class Impressora {
                         this.altera(id_way, { scan_status: '' }, res);
                     }
                     else if (impressoraTest.status == 'online' && valores.status == 'offline') {
-                        log.gravarComData('[OFFLINE] '+ valores.customer_name + ' ' + valores.manufacturer + ' ' + valores.model + ' ' + valores.serialNumber);
+                        log.gravarComData('[OFFLINE] ' + valores.customer_name + ' ' + valores.manufacturer + ' ' + valores.model + ' ' + valores.serialNumber);
                     }
                 }
                 else if (valores.status == 'online' && impressoraTest.scan_status == 'recentlyOnline') {
                     this.altera(id_way, { scan_status: '' }, res);
                 }
             }
-        callback(resultados);
+            callback(resultados);
         });
     }
     deleta(id, res) {
