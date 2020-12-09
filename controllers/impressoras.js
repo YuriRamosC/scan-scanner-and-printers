@@ -3,6 +3,7 @@ const Devourer = require('./devourer');
 const listaView = require('../views/printers/lista/lista.marko');
 const formView = require('../views/printers/form/form.marko');
 const countersView = require('../views/printers/counters/counters.marko');
+const log = require('./log');
 module.exports = app => {
     app.get('/impressoras', (req, res) => {
         var anotacoes = [];
@@ -13,6 +14,13 @@ module.exports = app => {
         });
         //   });
     })
+    
+    app.get('/log', (req, res) => {
+        log.lerLog((log)=>{
+            res.status(200).json({log: log});
+        });
+    });
+
     app.get('/api-impressoras', (req, res) => {
         Impressora.lista(res, function (impressoras) {
             res.status(200).json({ impressoras: impressoras });
@@ -30,8 +38,6 @@ module.exports = app => {
         });
     });
 
-
-    
 
     app.get('/impressoras-offline', (req, res) => {
         Impressora.listaOffline(res, function (impressoras) {

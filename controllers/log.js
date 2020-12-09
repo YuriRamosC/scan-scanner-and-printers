@@ -27,5 +27,9 @@ class Log {
             }
         })
     }
+
+    lerLog(callback){
+        callback(fs.readFileSync(logPath).toString().split("\\n"));
+    }
 }
 module.exports = new Log;
