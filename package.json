@@ -6,7 +6,7 @@
   "dependencies": {
     "alert": "^5.0.6",
     "async": "^3.2.0",
-    "axios": "^0.21.0",
+    "axios": "^0.21.1",
     "consign": "^0.1.6",
     "cors": "^2.8.5",
     "express": "^4.17.1",
